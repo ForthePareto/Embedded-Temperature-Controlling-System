@@ -7,6 +7,7 @@
 
 #ifndef MCAL_REGISTERS_H_
 #define MCAL_REGISTERS_H_
+#include <../MCAL/std_types.h>
 
 
 #define SREG 	(*(volatile uint8 * const)0x5F)
