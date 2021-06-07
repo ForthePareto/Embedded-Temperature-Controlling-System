@@ -15,9 +15,9 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 
-#include <../MCAL/common_macros.h>
-#include <../MCAL/std_types.h>
-#include <../MCAL/registers.h>
+#include "../MCAL/common_macros.h"
+#include "../MCAL/std_types.h"
+#include "../MCAL/registers.h"
 
 
 #define ENABLE_GLOBAL_INTERRUPT() (SET_BIT(SREG,7))
