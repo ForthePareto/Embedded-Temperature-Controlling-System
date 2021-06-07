@@ -6,8 +6,8 @@ void ADC_Init() {
     ADMUX = 0x40;
 }
 
-int ADC_Read(char channel) {
-    int Ain, AinLow;
+int ADC_Read(uint8 channel) {
+    uint16 Ain, AinLow;
 
     ADMUX = ADMUX | (channel & 0x0f);
 
@@ -16,8 +16,8 @@ int ADC_Read(char channel) {
     while ((ADCSRA & (1 << ADIF)) == 0) {}
 
     _delay_us(10);
-    AinLow = (int)ADCL;
-    Ain = (int)ADCH * 256;
+    AinLow = (uint16)ADCL;
+    Ain = (uint16)ADCH * 256;
     Ain = Ain + AinLow;
     return (Ain);
 }
