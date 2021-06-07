@@ -1,9 +1,8 @@
 #ifndef DIO_H_INCLUDED
 #define DIO_H_INCLUDED
 
-#include <std_types.h>
-#include <registers.h>
-#include <common_macros.h>
+
+#include "../MCAL/micro_config.h"
 
 void DIO_setPINDir(uint8 portname,uint8 pinnumber,uint8 direction);
 void DIO_write(uint8 portname,uint8 pinnumber,uint8 outputvalue);

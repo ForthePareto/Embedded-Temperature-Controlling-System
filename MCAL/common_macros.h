@@ -22,6 +22,7 @@
 									REG|=(VALUE << BIT);\
 									}
 #define TOGGLE_BIT(REG,BIT) (REG = REG ^ (1<<BIT)) // toggle bit in a specific register
+#define  READ_BIT(REG,BIT) (REG & (1<<BIT))
 #define IS_BIT_SET(REG,BIT) (REG & (1<<BIT))  // check if a bit is set or not
 #define IS_BIT_CLEAR(REG,BIT) (!(REG & (1<<BIT))) // check if a bit is cleared or not
 #define ROL(REG,num) ((REG<<num) | (REG>>8-num)) // rotate a specific bit left with a defined number of rotations

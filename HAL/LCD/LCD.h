@@ -1,18 +1,17 @@
 #ifndef LCD_H
 #define LCD_H
-
-#include <util/delay.h>
-#include <common_macros.h>
-#include <std_types.h>
-#include <registers.h>
-#include <DIO.h>
+#
+#include "../../MCAL/common_macros.h"
+#include "../../MCAL/std_types.h"
+#include "../../MCAL/registers.h"
+#include "../../MCAL/DIO.h"
 
 #define CLR_SCREEN           0X01
 #define DISPLAY_ON_CURSOR_ON 0X0E
 #define FOUR_BIT_MODE_I      0X02
 #define FOUR_BIT_MODE_II     0X28
 
-#define LCD_PORT PORTC
+#define LCD_PORT 'C'
 
 #define LCD_RS 0
 #define LCD_E 1
