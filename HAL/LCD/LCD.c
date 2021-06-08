@@ -39,7 +39,7 @@ void LCD_SendCommand(uint8 cmnd) {
     // high-to-low pulse (450 ns wide) to E pin
     // wait 100 us
 
-    uint8 HighNibb = (cmnd & 0x0f) >> 4;
+    uint8 HighNibb = (cmnd & 0xf0) >> 4;
     uint8 D01 = (HighNibb & 0x01);
     uint8 D02 = ((HighNibb >> 1) & 0x01);
     uint8 D03 = ((HighNibb >> 2) & 0x01);
@@ -52,7 +52,7 @@ void LCD_SendCommand(uint8 cmnd) {
     DIO_write(LCD_PORT, LCD_RS, 0);  //enable LCD to receive command
     send_falling_edge();             //send falling edge
 
-    uint8 LowNibb = cmnd & 0xf0;
+    uint8 LowNibb = cmnd & 0x0f;
     D01 = (LowNibb & 0x01);
     D02 = ((LowNibb >> 1) & 0x01);
     D03 = ((LowNibb >> 2) & 0x01);
@@ -75,7 +75,7 @@ void LCD_DispChar(uint8 data) {
     // high-to-low pulse (450 ns wide) to E pin
     // wait 100 us
 
-    uint8 HighNibb = (data & 0x0f) >> 4;
+    uint8 HighNibb = (data & 0xf0) >> 4;
     uint8 D01 = (HighNibb & 0x01);
     uint8 D02 = ((HighNibb >> 1) & 0x01);
     uint8 D03 = ((HighNibb >> 2) & 0x01);
@@ -88,7 +88,7 @@ void LCD_DispChar(uint8 data) {
     DIO_write(LCD_PORT, LCD_RS, 1);  //enable LCD to receive data
     send_falling_edge();             //send falling edge
 
-    uint8 LowNibb = data & 0xf0;
+    uint8 LowNibb = data & 0x0f;
     D01 = (LowNibb & 0x01);
     D02 = ((LowNibb >> 1) & 0x01);
     D03 = ((LowNibb >> 2) & 0x01);
@@ -111,7 +111,7 @@ void LCD_Print(uint8* str) {
 void LCD_clearscreen(void) {
     LCD_SendCommand(CLR_SCREEN);  // clear the screen
     _delay_ms(2);
-    LCD_SendCommand(0x80);
+    // LCD_SendCommand(0x80);
 }
 
 static void send_falling_edge(void) {

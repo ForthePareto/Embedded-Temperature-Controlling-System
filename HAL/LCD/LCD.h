@@ -6,6 +6,7 @@
 #include "../../MCAL/common_macros.h"
 #include "../../MCAL/registers.h"
 #include "../../MCAL/std_types.h"
+#include <util/delay.h>
 
 #define CLR_SCREEN           0X01
 #define DISPLAY_ON_CURSOR_ON 0X0E
