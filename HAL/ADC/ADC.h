@@ -12,7 +12,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-#include "../../MCAL/DIO.h"
+#include "../../MCAL/DIO/DIO.h"
 #include "../../MCAL/common_macros.h"
 #include "../../MCAL/registers.h"
 #include "../../MCAL/std_types.h"

@@ -2,8 +2,8 @@
 #define SPI_H
 #include <avr/io.h>
 #include <util/delay.h>
-#include "std_types.h"
-#include "DIO.h"
+#include "../std_types.h"
+#include "../DIO/DIO.h"
 
 #define MOSI 5
 #define MISO 6
