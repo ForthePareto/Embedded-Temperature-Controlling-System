@@ -65,8 +65,8 @@ void TIMER0_setCompareValue(uint8 value)
 
 void TIMER0_stop(void)
 {
+	CLEAR_BIT(TCCR0 , CS00);
 	CLEAR_BIT(TCCR0 , CS01);
-	CLEAR_BIT(TCCR0 , CS02);
 	CLEAR_BIT(TCCR0 , CS02);
 }
 

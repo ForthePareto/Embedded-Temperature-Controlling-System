@@ -21,8 +21,12 @@ C_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
+HAL/ADC \
+HAL/KEYPAD/keyPad-project/keyPad-project/Debug \
+HAL/KEYPAD/keyPad-project/keyPad-project \
 HAL/LCD \
 MCAL \
 MCAL/TIMER0 \
+MCAL/TIMER2 \
 . \
 
