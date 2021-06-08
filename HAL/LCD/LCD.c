@@ -121,3 +121,48 @@ static void send_falling_edge(void) {
     DIO_write(LCD_PORT, LCD_E, 0);  // clear enable pin
     _delay_ms(2);                   // period of low
 }
+
+void animateWelcome(void)
+{
+    LCD_clearscreen();
+    LCD_SendCommand(0x0c);
+    for (uint8 itr = 0; itr < 16; itr++)
+    {
+        LCD_SendCommand(0x14);
+    }
+    LCD_DispChar('W');
+    LCD_SendCommand(0x18);
+    //LCD_SendCommand(0x14);
+    LCD_DispChar('E');
+    LCD_SendCommand(0x18);
+    _delay_ms(10);
+    LCD_DispChar('L');
+    LCD_SendCommand(0x18);
+    _delay_ms(10);
+    LCD_DispChar('C');
+    LCD_SendCommand(0x18);
+    _delay_ms(10);
+    LCD_DispChar('O');
+    LCD_SendCommand(0x18);
+    _delay_ms(10);
+    LCD_DispChar('M');
+    LCD_SendCommand(0x18);
+    _delay_ms(10);
+    LCD_DispChar('E');
+    LCD_SendCommand(0x18);
+    _delay_ms(10);
+    for (uint8 i = 0; i < 3; i++)
+    {
+        for (uint8 itr = 0; itr < 9; itr++)
+        {
+            LCD_SendCommand(0x18);
+            _delay_ms(10);
+        }
+        for (uint8 itr = 0; itr < 9; itr++)
+        {
+            LCD_SendCommand(0x1c);
+            _delay_ms(10);
+        }
+    }
+    LCD_SendCommand(0x0e);
+}

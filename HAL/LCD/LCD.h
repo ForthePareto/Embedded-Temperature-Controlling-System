@@ -2,10 +2,10 @@
 
 #define LCD_H
 
-#include "../../MCAL/DIO.h"
-#include "../../MCAL/common_macros.h"
-#include "../../MCAL/registers.h"
-#include "../../MCAL/std_types.h"
+#include "DIO.h"
+#include "common_macros.h"
+#include "registers.h"
+#include "std_types.h"
 #include <util/delay.h>
 
 #define CLR_SCREEN           0X01
@@ -29,5 +29,8 @@ void LCD_DispChar(uint8);
 void LCD_Print(uint8 *);
 void LCD_goto(uint8, uint8);
 void LCD_clearscreen(void);
+
+// todo: make Disp Manager service
+void animateWelcome(void);
 
 #endif  // LCD_H
