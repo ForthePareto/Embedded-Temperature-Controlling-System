@@ -11,7 +11,7 @@ static void (*volatile g_T0CompareInterruptFunc_ptr)(void) = NULL;
 
 static void (*volatile g_T0OverflowInterruptFunc_ptr)(void) = NULL;
 
-
+volatile uint8 g_T0nOverflows = 0 ;
 
 void TIMER0_init(const TIMER0_config * configStruct)
 {

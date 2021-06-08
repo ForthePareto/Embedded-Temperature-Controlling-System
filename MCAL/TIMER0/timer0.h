@@ -25,6 +25,7 @@
 
 #define OCIE0 1
 #define TOIE0 0
+extern volatile uint8 g_T0nOverflows;
 
 typedef enum {
 	TIMER0_NORMAL_MODE = 0x00,
@@ -55,8 +56,8 @@ typedef struct {
 	TIMER0_mode mode;
 	TIMER0_compare_match_action compare_match_action;
 	TIMER0_clock clock;
-	uint8 compare_interrupt; //ENABLE or DISABLE
 	uint8 overflow_interrupt; //ENABLE or DISABLE
+	uint8 compare_interrupt; //ENABLE or DISABLE
 	uint8 initial_value;     //0:255
 	uint8 compare_value;	//0:255
 
