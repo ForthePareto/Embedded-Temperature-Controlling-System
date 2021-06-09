@@ -23,6 +23,8 @@
 #include "../HAL/KEYPAD/KEYPAD.h"
 #include "../MCAL/SPI/SPI.h"
 #include "../HAL/LCD/LCD.h"
+#include "../Services/DISPLAY/DISPLAY.h"
+#include "../Services/TC72/TC72.h"
 
 
 #define ENABLE_GLOBAL_INTERRUPT() (SET_BIT(SREG,7))
