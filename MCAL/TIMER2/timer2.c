@@ -11,6 +11,8 @@ static void (*volatile g_T2CompareInterruptFunc_ptr)(void) = NULL;
 
 static void (*volatile g_T2OverflowInterruptFunc_ptr)(void) = NULL;
 
+
+// MISRA :note 9225: integral expression of underlying type 'signed char' cannot be implicitly converted to type 'volatile uint8' (aka 'volatile unsigned char') because it is not a wider integer type of the same signedness [MISRA 2004 Rule 10.1, required]
 volatile uint8 g_T2nOverflows = 0 ;
 
 void TIMER2_init(const TIMER2_config * configStruct)
@@ -24,6 +26,10 @@ void TIMER2_init(const TIMER2_config * configStruct)
 	TIMER2_setCompareValue(configStruct->compare_value);
 
 	/* setting the force compare bit 0 according  to the mode of the timer*/
+
+	// MISRA :note 9050: dependence placed on operator precedence (operators '||' and '==') [MISRA 2004 Rule 12.1, advisory]
+	// MISRA :note 9240: right side of logical operator '||' is not a primary expression [MISRA 2004 Rule 12.5, required]
+
 	if(configStruct->mode == TIMER2_NORMAL_MODE || configStruct->mode == TIMER2_CTC_MODE)
 	{
 		/* in case of non-pwm mode */

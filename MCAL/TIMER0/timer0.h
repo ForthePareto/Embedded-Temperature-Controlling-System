@@ -55,6 +55,8 @@ typedef enum {
 typedef struct {
 	TIMER0_mode mode;
 	TIMER0_compare_match_action compare_match_action;
+
+	// MISRA :note 9093: the name 'clock' is reserved to the compiler [MISRA 2004 Rule 20.2, required]
 	TIMER0_clock clock;
 	uint8 overflow_interrupt; //ENABLE or DISABLE
 	uint8 compare_interrupt; //ENABLE or DISABLE

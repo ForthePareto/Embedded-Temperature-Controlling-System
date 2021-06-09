@@ -74,6 +74,10 @@ void LCD_DispChar(uint8 data) {
     // high-to-low pulse (450 ns wide) to E pin
     // wait 100 us
 
+
+
+    // MISRA :note 9226: integral expression of underlying type 'short' cannot be implicitly converted to type 'uint8' (aka 'unsigned char') because it is a complex expression [MISRA 2004 Rule 10.1, required]
+    // MISRA :note 9233: bitwise operator >> may not be applied to operand with signed underlying type [MISRA 2004 Rule 12.7, required]
     uint8 HighNibb = (data & 0xf0) >> 4;
     uint8 D01 = (HighNibb & 0x01);
     uint8 D02 = ((HighNibb >> 1) & 0x01);
@@ -87,6 +91,10 @@ void LCD_DispChar(uint8 data) {
     DIO_write(LCD_PORT, LCD_RS, 1);  //enable LCD to receive data
     send_falling_edge();             //send falling edge
 
+
+
+    // MISRA :note 9233: bitwise operator & may not be applied to operand with signed underlying type [MISRA 2004 Rule 12.7, required]
+    // MISRA :note 9225: integral expression of underlying type 'signed char' cannot be implicitly converted to type 'uint8' (aka 'unsigned char') because it is not a wider integer type of the same signedness [MISRA 2004 Rule 10.1, required]
     uint8 LowNibb = data & 0x0f;
     D01 = (LowNibb & 0x01);
     D02 = ((LowNibb >> 1) & 0x01);
@@ -103,6 +111,8 @@ void LCD_Print(uint8* str) {
     while ((*str) != 0)  //keep in the loop until the end of the string
     {
         LCD_DispChar(*str);  // print the characters of the string
+
+        // MISRA :note 9017: incrementing pointer [MISRA 2004 Rule 17.4, required]
         str++;               // make the pointer points to the next character
     }
 }
@@ -110,6 +120,8 @@ void LCD_Print(uint8* str) {
 void LCD_PrintString(uint8* str, uint8 len) {
     for (uint8 itr = 0; itr < len;itr++) //keep in the loop until the end of the string
     {
+
+        // MISRA :note 9264: array subscript applied to variable 'str' declared with non-array type 'uint8 *' (aka 'unsigned char *') [MISRA 2004 Rule 17.4, required]
         LCD_DispChar(str[itr]);  // print the characters of the string
     }
 }
