@@ -2,6 +2,9 @@
 
 void KEYPAD_Init(void)
 {
+    // Init Interrup
+    Interrupt_Init();
+    
     // Col.s are init. with the interrupt no need to bother with them (if INTS are initialized)
     // for Rows (init as outputs)
     DIO_setPINDir('D', R0, 1);
