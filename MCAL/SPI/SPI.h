@@ -2,8 +2,8 @@
 #define SPI_H
 #include <avr/io.h>
 #include <util/delay.h>
-#include "../std_types.h"
-#include "../DIO/DIO.h"
+#include "std_types.h"
+#include "DIO.h"
 
 #define MOSI 5
 #define MISO 6
@@ -23,8 +23,6 @@ void SPI_InitSlave (void);
 void SPI_Transmit(uint8 data);
 uint8 SPI_Receive(void);
 
-// todo: make a TC72 service
-void TC72_Init(void);
-uint8 * TC72_getTemp(uint8 *);
+
 
 #endif // SPI_H
