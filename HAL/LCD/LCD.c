@@ -21,11 +21,10 @@ void LCD_Init(void) {
     DIO_setPINDir(LCD_PORT, LCD_E, 1);
     DIO_setPINDir(LCD_PORT, LCD_RS, 1);
     /*****************************/
-    LCD_SendCommand(FOUR_BIT_MODE_I);       //enable 4 bit LCD Mode
-    LCD_SendCommand(FOUR_BIT_MODE_II);      //enable 4 bit LCD Mode
-    LCD_SendCommand(DISPLAY_ON_CURSOR_ON);  // enable cursor and display on
-    LCD_SendCommand(CLR_SCREEN);            // CLR LCD screen
-    _delay_ms(2);                           //small delay to ensure LCD finish
+    LCD_SendCommand(FOUR_BIT_MODE_I);        //enable 4 bit LCD Mode
+    LCD_SendCommand(FOUR_BIT_MODE_II);       //enable 4 bit LCD Mode
+    LCD_SendCommand(DISPLAY_ON_CURSOR_OFF);  // enable cursor and display on
+    LCD_clearscreen();                       // CLR LCD screen
 }
 
 void LCD_SendCommand(uint8 cmnd) {
@@ -105,6 +104,13 @@ void LCD_Print(uint8* str) {
     {
         LCD_DispChar(*str);  // print the characters of the string
         str++;               // make the pointer points to the next character
+    }
+}
+
+void LCD_PrintString(uint8* str, uint8 len) {
+    for (uint8 itr = 0; itr < len;itr++) //keep in the loop until the end of the string
+    {
+        LCD_DispChar(str[itr]);  // print the characters of the string
     }
 }
 
