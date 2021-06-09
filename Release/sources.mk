@@ -26,6 +26,7 @@ HAL/KEYPAD/keyPad-project/keyPad-project/Debug \
 HAL/KEYPAD/keyPad-project/keyPad-project \
 HAL/LCD \
 MCAL/DIO \
+MCAL/PWM0 \
 MCAL/SPI \
 MCAL/TIMER0 \
 MCAL/TIMER2 \

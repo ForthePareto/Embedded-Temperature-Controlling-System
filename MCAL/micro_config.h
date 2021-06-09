@@ -9,7 +9,7 @@
 #define MCAL_MICRO_CONFIG_H_
 
 #ifndef F_CPU
-#define F_CPU 1000000UL //1MHz Clock frequency
+#define F_CPU 4000000UL //1MHz Clock frequency
 #endif
 
 #include <avr/interrupt.h>

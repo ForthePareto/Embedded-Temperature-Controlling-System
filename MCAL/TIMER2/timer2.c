@@ -52,7 +52,8 @@ void TIMER2_init(const TIMER2_config * configStruct)
 
 void TIMER2_start(TIMER2_clock clk, uint8 initial_count)
 {
-	/* setting the pre-scaler and the initial value of the counter register 0:255 */
+	/* setting the pre-scaler (assuming their bits are initially zeros) and the initial value of the counter register 0:255 */
+	TIMER2_stop() ; //ensures clearing first 3 bits, TCNT0
 	TCCR2 |= clk;
 	TCNT2 = initial_count;
 }
@@ -68,6 +69,8 @@ void TIMER2_stop(void)
 	CLEAR_BIT(TCCR2 , CS20);
 	CLEAR_BIT(TCCR2 , CS21);
 	CLEAR_BIT(TCCR2 , CS22);
+	TCNT0 = 0 ;
+
 }
 
 void TIMER2_setCompareModeCallBack(void (*ptr)(void))

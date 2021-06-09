@@ -87,14 +87,15 @@ void TIMER0_init(const TIMER0_config *config_ptr);
  *	pointer to the configuration structure :
  *		indicating a constant configurations from the user in the main application
  ***********************************************************/
+void TIMER0_start(uint8 initial_count);
+/**********************************************************
+ * setting the pre-scaler and the initial value of the counter register 0:255
+ ***********************************************************/
+
 void TIMER0_setCompareValue(uint8 value);
 /**********************************************************
  * [ARGS] :
  * 	a 0:255 value that corresponds to the compare value to be set in the OCR0
- ***********************************************************/
-void TIMER0_start(TIMER0_clock clk, uint8 initial_count);
-/**********************************************************
- * setting the pre-scaler and the initial value of the counter register 0:255
  ***********************************************************/
 void TIMER0_stop(void);
 /**********************************************************

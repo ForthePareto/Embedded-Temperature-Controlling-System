@@ -17,12 +17,12 @@ void TIMER0_init(const TIMER0_config * configStruct)
 {
 	/* Mode setting: {NORMAL , PWM_PHASE_CORRECT, CTC, FAST_PWM}*/
 	TCCR0 = configStruct->mode ;
+
 	/*Setting compare match action {NORMAL, TOGGLE, CLEAR, SET}*/
 	TCCR0 |= ((configStruct->compare_match_action) << COM00) ;
 	/*Setting Counter registers initial values for normal and compare modes*/
-	TCNT0 = configStruct->initial_value;
-	OCR0 = configStruct->compare_value;
-
+	TIMER0_start(configStruct->initial_value) ;
+	TIMER0_setCompareValue(configStruct->compare_value) ;
 	/* setting the force compare bit 0 according  to the mode of the timer*/
 	if(configStruct->mode == TIMER0_NORMAL_MODE || configStruct->mode == TIMER0_CTC_MODE)
 	{
@@ -50,10 +50,10 @@ void TIMER0_init(const TIMER0_config * configStruct)
 	ENABLE_GLOBAL_INTERRUPT();
 }
 
-void TIMER0_start(TIMER0_clock clk, uint8 initial_count)
+void TIMER0_start(uint8 initial_count)
 {
-	/* setting the pre-scaler and the initial value of the counter register 0:255 */
-	TCCR0 |= clk;
+	/* setting the pre-scaler(assuming their bits are initially zeros) and the initial value of the counter register 0:255 */
+//	TIMER0_stop() ; //ensures clearing first 3 bits, TCNT0
 	TCNT0 = initial_count;
 }
 
@@ -68,6 +68,7 @@ void TIMER0_stop(void)
 	CLEAR_BIT(TCCR0 , CS00);
 	CLEAR_BIT(TCCR0 , CS01);
 	CLEAR_BIT(TCCR0 , CS02);
+	TCNT0 = 0 ;
 }
 
 void TIMER0_setCompareModeCallBack(void (*ptr)(void))
