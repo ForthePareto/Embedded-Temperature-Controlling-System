@@ -1,9 +1,11 @@
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
-#include "std_types.h"
-#include "LCD.h"
-#include "TC72.h"
+
+#include "../../MCAL/micro_config.h"
+
+#include "../../HAL/LCD/LCD.h"
+#include "../TC72/TC72.h"
 
 
 void DISPLAY_Welcome(void);

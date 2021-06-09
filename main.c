@@ -1,5 +1,5 @@
-/*
-#include "micro_config.h"
+
+#include "MCAL/micro_config.h"
 
 // SCREEN macros
 #define WELCOME   0
@@ -57,4 +57,4 @@ ISR(INT2_vect)
     STATE = OPERATION;
 }
 
- */
+

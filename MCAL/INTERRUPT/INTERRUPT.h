@@ -1,8 +1,10 @@
 #ifndef INTERRUPT_H
 #define INTERRUPT_H
 
-#include "common_macros.h"
-#include "DIO.h"
+
+
+#include "../micro_config.h"
+#include "../DIO/DIO.h"
 
 void Interrupt_Init(void);
 

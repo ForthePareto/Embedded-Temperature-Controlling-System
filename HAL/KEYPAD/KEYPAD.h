@@ -1,8 +1,8 @@
 #ifndef KEYPAD_H
 #define KEYPAD_H
 
-#include "std_types.h"
-#include "DIO.h"
+#include "../../MCAL/micro_config.h"
+#include "../../MCAL/DIO/DIO.h"
 
 #define R0 4
 #define R1 5

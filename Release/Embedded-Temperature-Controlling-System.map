@@ -1,11 +1,11 @@
 Archive member included because of file (symbol)
 
 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodqi4.o)
-                              ./MCAL/SPI/SPI.o (__udivmodqi4)
+                              ./Service/TC72/TC72.o (__udivmodqi4)
 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
                               c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o (exit)
 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
-                              ./MCAL/TIMER2/test_timer2.o (__do_copy_data)
+                              ./Service/DISPLAY/DISPLAY.o (__do_copy_data)
 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
                               ./MCAL/TIMER2/timer2.o (__do_clear_bss)
 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_fixunssfsi.o)
@@ -45,6 +45,8 @@ signature        0x00840000         0x00000400         rw !x
 Linker script and memory map
 
 LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
+LOAD ./Service/TC72/TC72.o
+LOAD ./Service/DISPLAY/DISPLAY.o
 LOAD ./MCAL/TIMER2/test_timer2.o
 LOAD ./MCAL/TIMER2/timer2.o
 LOAD ./MCAL/TIMER0/main_timer.o
@@ -52,9 +54,10 @@ LOAD ./MCAL/TIMER0/timer0.o
 LOAD ./MCAL/SPI/SPI.o
 LOAD ./MCAL/PWM0/pwm0.o
 LOAD ./MCAL/PWM0/test_pwm0.o
+LOAD ./MCAL/INTERRUPT/INTERRUPT.o
 LOAD ./MCAL/DIO/DIO.o
 LOAD ./HAL/LCD/LCD.o
-LOAD ./HAL/KEYPAD/keyPad-project/keyPad-project/main.o
+LOAD ./HAL/KEYPAD/KEYPAD.o
 LOAD ./HAL/ADC/ADC.o
 LOAD ./main.o
 LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
@@ -151,7 +154,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x1820
+.text           0x00000000     0x1c9a
  *(.vectors)
  .vectors       0x00000000       0x54 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
                 0x00000000                __vectors
@@ -207,23 +210,22 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  *(.init9)
  *(.text)
  .text          0x0000008e        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
-                0x0000008e                __vector_1
                 0x0000008e                __vector_12
                 0x0000008e                __bad_interrupt
                 0x0000008e                __vector_6
-                0x0000008e                __vector_3
                 0x0000008e                __vector_13
                 0x0000008e                __vector_17
                 0x0000008e                __vector_19
                 0x0000008e                __vector_7
                 0x0000008e                __vector_9
-                0x0000008e                __vector_2
                 0x0000008e                __vector_15
                 0x0000008e                __vector_8
                 0x0000008e                __vector_14
                 0x0000008e                __vector_16
                 0x0000008e                __vector_18
                 0x0000008e                __vector_20
+ .text          0x00000092        0x0 ./Service/TC72/TC72.o
+ .text          0x00000092        0x0 ./Service/DISPLAY/DISPLAY.o
  .text          0x00000092        0x0 ./MCAL/TIMER2/test_timer2.o
  .text          0x00000092        0x0 ./MCAL/TIMER2/timer2.o
  .text          0x00000092        0x0 ./MCAL/TIMER0/main_timer.o
@@ -231,9 +233,10 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .text          0x00000092        0x0 ./MCAL/SPI/SPI.o
  .text          0x00000092        0x0 ./MCAL/PWM0/pwm0.o
  .text          0x00000092        0x0 ./MCAL/PWM0/test_pwm0.o
+ .text          0x00000092        0x0 ./MCAL/INTERRUPT/INTERRUPT.o
  .text          0x00000092        0x0 ./MCAL/DIO/DIO.o
  .text          0x00000092        0x0 ./HAL/LCD/LCD.o
- .text          0x00000092        0x0 ./HAL/KEYPAD/keyPad-project/keyPad-project/main.o
+ .text          0x00000092        0x0 ./HAL/KEYPAD/KEYPAD.o
  .text          0x00000092        0x0 ./HAL/ADC/ADC.o
  .text          0x00000092        0x0 ./main.o
  .text          0x00000092        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodqi4.o)
@@ -262,156 +265,183 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
                 0x000009d4                __fpcmp_parts_f
                 0x00000a86                . = ALIGN (0x2)
  *(.text.*)
- .text.toggle_pin
-                0x00000a86        0xa ./MCAL/TIMER2/test_timer2.o
-                0x00000a86                toggle_pin
- .text.main     0x00000a90       0x3e ./MCAL/TIMER2/test_timer2.o
-                0x00000a90                main
- .text.TIMER2_init
-                0x00000ace       0x62 ./MCAL/TIMER2/timer2.o
-                0x00000ace                TIMER2_init
- .text.TIMER2_start
-                0x00000b30        0x4 ./MCAL/TIMER2/timer2.o
-                0x00000b30                TIMER2_start
- .text.TIMER2_setCompareValue
-                0x00000b34        0x4 ./MCAL/TIMER2/timer2.o
-                0x00000b34                TIMER2_setCompareValue
- .text.TIMER2_stop
-                0x00000b38       0x16 ./MCAL/TIMER2/timer2.o
-                0x00000b38                TIMER2_stop
- .text.TIMER2_setCompareModeCallBack
-                0x00000b4e        0xa ./MCAL/TIMER2/timer2.o
-                0x00000b4e                TIMER2_setCompareModeCallBack
- .text.TIMER2_setOverflowModeCallBack
-                0x00000b58        0xa ./MCAL/TIMER2/timer2.o
-                0x00000b58                TIMER2_setOverflowModeCallBack
- .text.__vector_4
-                0x00000b62       0x5a ./MCAL/TIMER2/timer2.o
-                0x00000b62                __vector_4
- .text.__vector_5
-                0x00000bbc       0x5a ./MCAL/TIMER2/timer2.o
-                0x00000bbc                __vector_5
- .text.TIMER0_init
-                0x00000c16       0x56 ./MCAL/TIMER0/timer0.o
-                0x00000c16                TIMER0_init
- .text.TIMER0_start
-                0x00000c6c        0x4 ./MCAL/TIMER0/timer0.o
-                0x00000c6c                TIMER0_start
- .text.TIMER0_setCompareValue
-                0x00000c70        0x4 ./MCAL/TIMER0/timer0.o
-                0x00000c70                TIMER0_setCompareValue
- .text.TIMER0_stop
-                0x00000c74       0x16 ./MCAL/TIMER0/timer0.o
-                0x00000c74                TIMER0_stop
- .text.TIMER0_setCompareModeCallBack
-                0x00000c8a        0xa ./MCAL/TIMER0/timer0.o
-                0x00000c8a                TIMER0_setCompareModeCallBack
- .text.TIMER0_setOverflowModeCallBack
-                0x00000c94        0xa ./MCAL/TIMER0/timer0.o
-                0x00000c94                TIMER0_setOverflowModeCallBack
- .text.__vector_10
-                0x00000c9e       0x5a ./MCAL/TIMER0/timer0.o
-                0x00000c9e                __vector_10
- .text.__vector_11
-                0x00000cf8       0x5a ./MCAL/TIMER0/timer0.o
-                0x00000cf8                __vector_11
- .text.SPI_InitSlave
-                0x00000d52        0x6 ./MCAL/SPI/SPI.o
-                0x00000d52                SPI_InitSlave
- .text.SPI_Transmit
-                0x00000d58        0x8 ./MCAL/SPI/SPI.o
-                0x00000d58                SPI_Transmit
- .text.SPI_Receive
-                0x00000d60        0x8 ./MCAL/SPI/SPI.o
-                0x00000d60                SPI_Receive
  .text.convertIntChar
-                0x00000d68       0x62 ./MCAL/SPI/SPI.o
-                0x00000d68                convertIntChar
- .text.TC72_getTemp
-                0x00000dca       0xd8 ./MCAL/SPI/SPI.o
-                0x00000dca                TC72_getTemp
+                0x00000a86       0x62 ./Service/TC72/TC72.o
+                0x00000a86                convertIntChar
  .text.TC72_Init
-                0x00000ea2       0x2e ./MCAL/SPI/SPI.o
-                0x00000ea2                TC72_Init
+                0x00000ae8       0x28 ./Service/TC72/TC72.o
+                0x00000ae8                TC72_Init
+ .text.TC72_getTemp
+                0x00000b10       0x90 ./Service/TC72/TC72.o
+                0x00000b10                TC72_getTemp
+ .text.DISPLAY_PrintSTATE
+                0x00000ba0       0x32 ./Service/DISPLAY/DISPLAY.o
+                0x00000ba0                DISPLAY_PrintSTATE
+ .text.DSPLAY_IDLEscreen
+                0x00000bd2       0x76 ./Service/DISPLAY/DISPLAY.o
+                0x00000bd2                DSPLAY_IDLEscreen
+ .text.DISPLAY_Welcome
+                0x00000c48       0xe4 ./Service/DISPLAY/DISPLAY.o
+                0x00000c48                DISPLAY_Welcome
+ .text.TIMER2_init
+                0x00000d2c       0x62 ./MCAL/TIMER2/timer2.o
+                0x00000d2c                TIMER2_init
+ .text.TIMER2_start
+                0x00000d8e        0x4 ./MCAL/TIMER2/timer2.o
+                0x00000d8e                TIMER2_start
+ .text.TIMER2_setCompareValue
+                0x00000d92        0x4 ./MCAL/TIMER2/timer2.o
+                0x00000d92                TIMER2_setCompareValue
+ .text.TIMER2_stop
+                0x00000d96       0x16 ./MCAL/TIMER2/timer2.o
+                0x00000d96                TIMER2_stop
+ .text.TIMER2_setCompareModeCallBack
+                0x00000dac        0xa ./MCAL/TIMER2/timer2.o
+                0x00000dac                TIMER2_setCompareModeCallBack
+ .text.TIMER2_setOverflowModeCallBack
+                0x00000db6        0xa ./MCAL/TIMER2/timer2.o
+                0x00000db6                TIMER2_setOverflowModeCallBack
+ .text.__vector_4
+                0x00000dc0       0x5a ./MCAL/TIMER2/timer2.o
+                0x00000dc0                __vector_4
+ .text.__vector_5
+                0x00000e1a       0x5a ./MCAL/TIMER2/timer2.o
+                0x00000e1a                __vector_5
+ .text.TIMER0_init
+                0x00000e74       0x56 ./MCAL/TIMER0/timer0.o
+                0x00000e74                TIMER0_init
+ .text.TIMER0_start
+                0x00000eca        0x4 ./MCAL/TIMER0/timer0.o
+                0x00000eca                TIMER0_start
+ .text.TIMER0_setCompareValue
+                0x00000ece        0x4 ./MCAL/TIMER0/timer0.o
+                0x00000ece                TIMER0_setCompareValue
+ .text.TIMER0_stop
+                0x00000ed2       0x16 ./MCAL/TIMER0/timer0.o
+                0x00000ed2                TIMER0_stop
+ .text.TIMER0_setCompareModeCallBack
+                0x00000ee8        0xa ./MCAL/TIMER0/timer0.o
+                0x00000ee8                TIMER0_setCompareModeCallBack
+ .text.TIMER0_setOverflowModeCallBack
+                0x00000ef2        0xa ./MCAL/TIMER0/timer0.o
+                0x00000ef2                TIMER0_setOverflowModeCallBack
+ .text.__vector_10
+                0x00000efc       0x5a ./MCAL/TIMER0/timer0.o
+                0x00000efc                __vector_10
+ .text.__vector_11
+                0x00000f56       0x5a ./MCAL/TIMER0/timer0.o
+                0x00000f56                __vector_11
+ .text.SPI_InitSlave
+                0x00000fb0        0x6 ./MCAL/SPI/SPI.o
+                0x00000fb0                SPI_InitSlave
+ .text.SPI_Transmit
+                0x00000fb6        0x8 ./MCAL/SPI/SPI.o
+                0x00000fb6                SPI_Transmit
+ .text.SPI_Receive
+                0x00000fbe        0x8 ./MCAL/SPI/SPI.o
+                0x00000fbe                SPI_Receive
  .text.SPI_InitMaster
-                0x00000ed0       0x28 ./MCAL/SPI/SPI.o
-                0x00000ed0                SPI_InitMaster
+                0x00000fc6       0x28 ./MCAL/SPI/SPI.o
+                0x00000fc6                SPI_InitMaster
  .text.PMW0_stop
-                0x00000ef8        0xc ./MCAL/PWM0/pwm0.o
-                0x00000ef8                PMW0_stop
+                0x00000fee        0xc ./MCAL/PWM0/pwm0.o
+                0x00000fee                PMW0_stop
  .text.PWM0_start
-                0x00000f04       0x1a ./MCAL/PWM0/pwm0.o
-                0x00000f04                PWM0_start
+                0x00000ffa       0x1a ./MCAL/PWM0/pwm0.o
+                0x00000ffa                PWM0_start
  .text.PWM0_init
-                0x00000f1e       0x50 ./MCAL/PWM0/pwm0.o
-                0x00000f1e                PWM0_init
+                0x00001014       0x50 ./MCAL/PWM0/pwm0.o
+                0x00001014                PWM0_init
+ .text.Interrupt_Init
+                0x00001064       0x74 ./MCAL/INTERRUPT/INTERRUPT.o
+                0x00001064                Interrupt_Init
  .text.DIO_setPINDir
-                0x00000f6e       0xe4 ./MCAL/DIO/DIO.o
-                0x00000f6e                DIO_setPINDir
+                0x000010d8       0xe4 ./MCAL/DIO/DIO.o
+                0x000010d8                DIO_setPINDir
  .text.DIO_write
-                0x00001052       0xe4 ./MCAL/DIO/DIO.o
-                0x00001052                DIO_write
+                0x000011bc       0xe4 ./MCAL/DIO/DIO.o
+                0x000011bc                DIO_write
  .text.DIO_readPin
-                0x00001136       0x3c ./MCAL/DIO/DIO.o
-                0x00001136                DIO_readPin
+                0x000012a0       0x3c ./MCAL/DIO/DIO.o
+                0x000012a0                DIO_readPin
  .text.DIO_readPort
-                0x00001172      0x108 ./MCAL/DIO/DIO.o
-                0x00001172                DIO_readPort
+                0x000012dc      0x108 ./MCAL/DIO/DIO.o
+                0x000012dc                DIO_readPort
  .text.DIO_togglePin
-                0x0000127a       0x70 ./MCAL/DIO/DIO.o
-                0x0000127a                DIO_togglePin
+                0x000013e4       0x70 ./MCAL/DIO/DIO.o
+                0x000013e4                DIO_togglePin
  .text.DIO_writePort
-                0x000012ea       0x28 ./MCAL/DIO/DIO.o
-                0x000012ea                DIO_writePort
+                0x00001454       0x28 ./MCAL/DIO/DIO.o
+                0x00001454                DIO_writePort
  .text.DIO_writeHighnibble
-                0x00001312       0x40 ./MCAL/DIO/DIO.o
-                0x00001312                DIO_writeHighnibble
+                0x0000147c       0x40 ./MCAL/DIO/DIO.o
+                0x0000147c                DIO_writeHighnibble
  .text.clear_highNibble
-                0x00001352       0x38 ./MCAL/DIO/DIO.o
-                0x00001352                clear_highNibble
+                0x000014bc       0x38 ./MCAL/DIO/DIO.o
+                0x000014bc                clear_highNibble
  .text.DIO_connectPullup
-                0x0000138a      0x120 ./MCAL/DIO/DIO.o
-                0x0000138a                DIO_connectPullup
+                0x000014f4      0x120 ./MCAL/DIO/DIO.o
+                0x000014f4                DIO_connectPullup
  .text.send_falling_edge
-                0x000014aa       0x24 ./HAL/LCD/LCD.o
+                0x00001614       0x1c ./HAL/LCD/LCD.o
  .text.LCD_DispChar
-                0x000014ce       0x96 ./HAL/LCD/LCD.o
-                0x000014ce                LCD_DispChar
+                0x00001630       0x96 ./HAL/LCD/LCD.o
+                0x00001630                LCD_DispChar
  .text.LCD_Print
-                0x00001564       0x1a ./HAL/LCD/LCD.o
-                0x00001564                LCD_Print
+                0x000016c6       0x1a ./HAL/LCD/LCD.o
+                0x000016c6                LCD_Print
  .text.LCD_SendCommand
-                0x0000157e       0x96 ./HAL/LCD/LCD.o
-                0x0000157e                LCD_SendCommand
+                0x000016e0       0x96 ./HAL/LCD/LCD.o
+                0x000016e0                LCD_SendCommand
  .text.LCD_clearscreen
-                0x00001614       0x10 ./HAL/LCD/LCD.o
-                0x00001614                LCD_clearscreen
- .text.animateWelcome
-                0x00001624       0xe4 ./HAL/LCD/LCD.o
-                0x00001624                animateWelcome
+                0x00001776       0x10 ./HAL/LCD/LCD.o
+                0x00001776                LCD_clearscreen
  .text.LCD_Init
-                0x00001708       0x5e ./HAL/LCD/LCD.o
-                0x00001708                LCD_Init
+                0x00001786       0x5e ./HAL/LCD/LCD.o
+                0x00001786                LCD_Init
+ .text.KeyPad_GetKeyC2
+                0x000017e4       0xd0 ./HAL/KEYPAD/KEYPAD.o
+                0x000017e4                KeyPad_GetKeyC2
+ .text.KeyPad_GetKeyC1
+                0x000018b4       0xd0 ./HAL/KEYPAD/KEYPAD.o
+                0x000018b4                KeyPad_GetKeyC1
+ .text.KeyPad_GetKeyC0
+                0x00001984       0xd0 ./HAL/KEYPAD/KEYPAD.o
+                0x00001984                KeyPad_GetKeyC0
+ .text.KEYPAD_Init
+                0x00001a54       0x52 ./HAL/KEYPAD/KEYPAD.o
+                0x00001a54                KEYPAD_Init
  .text.ADC_Init
-                0x00001766        0xc ./HAL/ADC/ADC.o
-                0x00001766                ADC_Init
+                0x00001aa6        0xc ./HAL/ADC/ADC.o
+                0x00001aa6                ADC_Init
  .text.ADC_Read
-                0x00001772       0x24 ./HAL/ADC/ADC.o
-                0x00001772                ADC_Read
- .text.libgcc   0x00001796       0x18 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodqi4.o)
-                0x00001796                __udivmodqi4
- .text.libgcc   0x000017ae        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
- .text.libgcc   0x000017ae        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
- .text.libgcc   0x000017ae        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
- .text.libgcc   0x000017ae       0x38 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
-                0x000017ae                __prologue_saves__
- .text.libgcc   0x000017e6       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
-                0x000017e6                __epilogue_restores__
-                0x0000181c                . = ALIGN (0x2)
+                0x00001ab2       0x24 ./HAL/ADC/ADC.o
+                0x00001ab2                ADC_Read
+ .text.__vector_3
+                0x00001ad6       0x56 ./main.o
+                0x00001ad6                __vector_3
+ .text.__vector_2
+                0x00001b2c       0x56 ./main.o
+                0x00001b2c                __vector_2
+ .text.__vector_1
+                0x00001b82       0x56 ./main.o
+                0x00001b82                __vector_1
+ .text.main     0x00001bd8       0x38 ./main.o
+                0x00001bd8                main
+ .text.libgcc   0x00001c10       0x18 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodqi4.o)
+                0x00001c10                __udivmodqi4
+ .text.libgcc   0x00001c28        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .text.libgcc   0x00001c28        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc   0x00001c28        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc   0x00001c28       0x38 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
+                0x00001c28                __prologue_saves__
+ .text.libgcc   0x00001c60       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
+                0x00001c60                __epilogue_restores__
+                0x00001c96                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000181c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
-                0x0000181c                exit
-                0x0000181c                _exit
+ .fini9         0x00001c96        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+                0x00001c96                exit
+                0x00001c96                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -430,110 +460,120 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000181c        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .fini0         0x00001c96        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00001820                _etext = .
+                0x00001c9a                _etext = .
 
-.data           0x00800060       0x10 load address 0x00001820
+.data           0x00800060       0x3e load address 0x00001c9a
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
- .data          0x00800060        0x0 ./MCAL/TIMER2/test_timer2.o
- .data          0x00800060        0x0 ./MCAL/TIMER2/timer2.o
- .data          0x00800060        0x0 ./MCAL/TIMER0/main_timer.o
- .data          0x00800060        0x0 ./MCAL/TIMER0/timer0.o
- .data          0x00800060        0x0 ./MCAL/SPI/SPI.o
- .data          0x00800060        0x0 ./MCAL/PWM0/pwm0.o
- .data          0x00800060        0x0 ./MCAL/PWM0/test_pwm0.o
- .data          0x00800060        0x0 ./MCAL/DIO/DIO.o
- .data          0x00800060        0x0 ./HAL/LCD/LCD.o
- .data          0x00800060        0x0 ./HAL/KEYPAD/keyPad-project/keyPad-project/main.o
- .data          0x00800060        0x0 ./HAL/ADC/ADC.o
- .data          0x00800060        0x0 ./main.o
- .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodqi4.o)
- .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
- .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
- .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
- .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_fixunssfsi.o)
- .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_addsub_sf.o)
- .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mul_sf.o)
- .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_ge_sf.o)
- .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_sf_to_si.o)
- .data          0x00800060        0x8 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_thenan_sf.o)
-                0x00800060                __thenan_sf
- .data          0x00800068        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
- .data          0x00800068        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
- .data          0x00800068        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_pack_sf.o)
- .data          0x00800068        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_unpack_sf.o)
- .data          0x00800068        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_fpcmp_parts_sf.o)
+ .data          0x00800060        0x0 ./Service/TC72/TC72.o
+ .data          0x00800060       0x30 ./Service/DISPLAY/DISPLAY.o
+ .data          0x00800090        0x0 ./MCAL/TIMER2/test_timer2.o
+ .data          0x00800090        0x0 ./MCAL/TIMER2/timer2.o
+ .data          0x00800090        0x0 ./MCAL/TIMER0/main_timer.o
+ .data          0x00800090        0x0 ./MCAL/TIMER0/timer0.o
+ .data          0x00800090        0x0 ./MCAL/SPI/SPI.o
+ .data          0x00800090        0x0 ./MCAL/PWM0/pwm0.o
+ .data          0x00800090        0x0 ./MCAL/PWM0/test_pwm0.o
+ .data          0x00800090        0x0 ./MCAL/INTERRUPT/INTERRUPT.o
+ .data          0x00800090        0x0 ./MCAL/DIO/DIO.o
+ .data          0x00800090        0x0 ./HAL/LCD/LCD.o
+ .data          0x00800090        0x0 ./HAL/KEYPAD/KEYPAD.o
+ .data          0x00800090        0x0 ./HAL/ADC/ADC.o
+ .data          0x00800090        0x3 ./main.o
+ .data          0x00800093        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodqi4.o)
+ .data          0x00800093        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .data          0x00800093        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .data          0x00800093        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .data          0x00800093        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_fixunssfsi.o)
+ .data          0x00800093        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_addsub_sf.o)
+ .data          0x00800093        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mul_sf.o)
+ .data          0x00800093        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_ge_sf.o)
+ .data          0x00800093        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_sf_to_si.o)
+ .data          0x00800093        0x8 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_thenan_sf.o)
+                0x00800093                __thenan_sf
+ .data          0x0080009b        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
+ .data          0x0080009b        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
+ .data          0x0080009b        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_pack_sf.o)
+ .data          0x0080009b        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_unpack_sf.o)
+ .data          0x0080009b        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_fpcmp_parts_sf.o)
  *(.data*)
+ .data.defTemp  0x0080009b        0x2 ./main.o
+                0x0080009b                defTemp
  *(.rodata)
  *(.rodata*)
- .rodata.C.0.1310
-                0x00800068        0x7 ./MCAL/TIMER2/test_timer2.o
  *(.gnu.linkonce.d*)
-                0x00800070                . = ALIGN (0x2)
- *fill*         0x0080006f        0x1 00
-                0x00800070                _edata = .
-                0x00800070                PROVIDE (__data_end, .)
+                0x0080009e                . = ALIGN (0x2)
+ *fill*         0x0080009d        0x1 00
+                0x0080009e                _edata = .
+                0x0080009e                PROVIDE (__data_end, .)
 
-.bss            0x00800070        0xa
-                0x00800070                PROVIDE (__bss_start, .)
+.bss            0x0080009e        0xc
+                0x0080009e                PROVIDE (__bss_start, .)
  *(.bss)
- .bss           0x00800070        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
- .bss           0x00800070        0x0 ./MCAL/TIMER2/test_timer2.o
- .bss           0x00800070        0x0 ./MCAL/TIMER2/timer2.o
- .bss           0x00800070        0x0 ./MCAL/TIMER0/main_timer.o
- .bss           0x00800070        0x0 ./MCAL/TIMER0/timer0.o
- .bss           0x00800070        0x0 ./MCAL/SPI/SPI.o
- .bss           0x00800070        0x0 ./MCAL/PWM0/pwm0.o
- .bss           0x00800070        0x0 ./MCAL/PWM0/test_pwm0.o
- .bss           0x00800070        0x0 ./MCAL/DIO/DIO.o
- .bss           0x00800070        0x0 ./HAL/LCD/LCD.o
- .bss           0x00800070        0x0 ./HAL/KEYPAD/keyPad-project/keyPad-project/main.o
- .bss           0x00800070        0x0 ./HAL/ADC/ADC.o
- .bss           0x00800070        0x0 ./main.o
- .bss           0x00800070        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodqi4.o)
- .bss           0x00800070        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
- .bss           0x00800070        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
- .bss           0x00800070        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
- .bss           0x00800070        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_fixunssfsi.o)
- .bss           0x00800070        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_addsub_sf.o)
- .bss           0x00800070        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mul_sf.o)
- .bss           0x00800070        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_ge_sf.o)
- .bss           0x00800070        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_sf_to_si.o)
- .bss           0x00800070        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_thenan_sf.o)
- .bss           0x00800070        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
- .bss           0x00800070        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
- .bss           0x00800070        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_pack_sf.o)
- .bss           0x00800070        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_unpack_sf.o)
- .bss           0x00800070        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_fpcmp_parts_sf.o)
+ .bss           0x0080009e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
+ .bss           0x0080009e        0x0 ./Service/TC72/TC72.o
+ .bss           0x0080009e        0x0 ./Service/DISPLAY/DISPLAY.o
+ .bss           0x0080009e        0x0 ./MCAL/TIMER2/test_timer2.o
+ .bss           0x0080009e        0x0 ./MCAL/TIMER2/timer2.o
+ .bss           0x0080009e        0x0 ./MCAL/TIMER0/main_timer.o
+ .bss           0x0080009e        0x0 ./MCAL/TIMER0/timer0.o
+ .bss           0x0080009e        0x0 ./MCAL/SPI/SPI.o
+ .bss           0x0080009e        0x0 ./MCAL/PWM0/pwm0.o
+ .bss           0x0080009e        0x0 ./MCAL/PWM0/test_pwm0.o
+ .bss           0x0080009e        0x0 ./MCAL/INTERRUPT/INTERRUPT.o
+ .bss           0x0080009e        0x0 ./MCAL/DIO/DIO.o
+ .bss           0x0080009e        0x0 ./HAL/LCD/LCD.o
+ .bss           0x0080009e        0x0 ./HAL/KEYPAD/KEYPAD.o
+ .bss           0x0080009e        0x0 ./HAL/ADC/ADC.o
+ .bss           0x0080009e        0x0 ./main.o
+ .bss           0x0080009e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodqi4.o)
+ .bss           0x0080009e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .bss           0x0080009e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .bss           0x0080009e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .bss           0x0080009e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_fixunssfsi.o)
+ .bss           0x0080009e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_addsub_sf.o)
+ .bss           0x0080009e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mul_sf.o)
+ .bss           0x0080009e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_ge_sf.o)
+ .bss           0x0080009e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_sf_to_si.o)
+ .bss           0x0080009e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_thenan_sf.o)
+ .bss           0x0080009e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
+ .bss           0x0080009e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
+ .bss           0x0080009e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_pack_sf.o)
+ .bss           0x0080009e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_unpack_sf.o)
+ .bss           0x0080009e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_fpcmp_parts_sf.o)
  *(.bss*)
  .bss.g_T2nOverflows
-                0x00800070        0x1 ./MCAL/TIMER2/timer2.o
-                0x00800070                g_T2nOverflows
+                0x0080009e        0x1 ./MCAL/TIMER2/timer2.o
+                0x0080009e                g_T2nOverflows
  .bss.g_T2OverflowInterruptFunc_ptr
-                0x00800071        0x2 ./MCAL/TIMER2/timer2.o
+                0x0080009f        0x2 ./MCAL/TIMER2/timer2.o
  .bss.g_T2CompareInterruptFunc_ptr
-                0x00800073        0x2 ./MCAL/TIMER2/timer2.o
+                0x008000a1        0x2 ./MCAL/TIMER2/timer2.o
  .bss.g_T0nOverflows
-                0x00800075        0x1 ./MCAL/TIMER0/timer0.o
-                0x00800075                g_T0nOverflows
+                0x008000a3        0x1 ./MCAL/TIMER0/timer0.o
+                0x008000a3                g_T0nOverflows
  .bss.g_T0OverflowInterruptFunc_ptr
-                0x00800076        0x2 ./MCAL/TIMER0/timer0.o
+                0x008000a4        0x2 ./MCAL/TIMER0/timer0.o
  .bss.g_T0CompareInterruptFunc_ptr
-                0x00800078        0x2 ./MCAL/TIMER0/timer0.o
+                0x008000a6        0x2 ./MCAL/TIMER0/timer0.o
+ .bss.STATE     0x008000a8        0x1 ./main.o
+                0x008000a8                STATE
+ .bss.SCREEN    0x008000a9        0x1 ./main.o
+                0x008000a9                SCREEN
  *(COMMON)
-                0x0080007a                PROVIDE (__bss_end, .)
-                0x00001820                __data_load_start = LOADADDR (.data)
-                0x00001830                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x008000aa                PROVIDE (__bss_end, .)
+                0x00001c9a                __data_load_start = LOADADDR (.data)
+                0x00001cd8                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x0080007a        0x0
-                0x0080007a                PROVIDE (__noinit_start, .)
+.noinit         0x008000aa        0x0
+                0x008000aa                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x0080007a                PROVIDE (__noinit_end, .)
-                0x0080007a                _end = .
-                0x0080007a                PROVIDE (__heap_start, .)
+                0x008000aa                PROVIDE (__noinit_end, .)
+                0x008000aa                _end = .
+                0x008000aa                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)

@@ -1,8 +1,11 @@
 #ifndef TC72_H
 #define TC72_H
 
-#include"std_types.h"
-#include"SPI.h"
+
+#include "../../MCAL/micro_config.h"
+#include "../../MCAL/SPI/SPI.h"
+
+#define SS 4
 
 // todo: make a TC72 service
 void TC72_Init(void);
