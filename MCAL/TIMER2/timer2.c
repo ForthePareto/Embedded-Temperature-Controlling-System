@@ -20,8 +20,8 @@ void TIMER2_init(const TIMER2_config * configStruct)
 	/*Setting compare match action {NORMAL, TOGGLE, CLEAR, SET}*/
 	TCCR2 |= ((configStruct->compare_match_action) << COM20) ;
 	/*Setting Counter registers initial values for normal and compare modes*/
-	TCNT2 = configStruct->initial_value;
-	OCR2 = configStruct->compare_value;
+	TIMER2_start(configStruct->initial_value);
+	TIMER2_setCompareValue(configStruct->compare_value);
 
 	/* setting the force compare bit 0 according  to the mode of the timer*/
 	if(configStruct->mode == TIMER2_NORMAL_MODE || configStruct->mode == TIMER2_CTC_MODE)
@@ -50,16 +50,14 @@ void TIMER2_init(const TIMER2_config * configStruct)
 	ENABLE_GLOBAL_INTERRUPT();
 }
 
-void TIMER2_start(TIMER2_clock clk, uint8 initial_count)
+ void TIMER2_start( uint8 initial_count)
 {
 	/* setting the pre-scaler (assuming their bits are initially zeros) and the initial value of the counter register 0:255 */
-	TIMER2_stop() ; //ensures clearing first 3 bits, TCNT0
-	TCCR2 |= clk;
 	TCNT2 = initial_count;
 }
 
 
-void TIMER2_setCompareValue(uint8 value)
+ void TIMER2_setCompareValue(uint8 value)
 {
 	OCR2 = value;
 }

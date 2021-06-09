@@ -93,11 +93,11 @@ void TIMER2_setCompareValue(uint8 value);
  * [ARGS] :
  * 	a 0:255 value that corresponds to the compare value to be set in the OCR0
  ***********************************************************/
-void TIMER2_start(TIMER2_clock clk, uint8 initial_count);
+ void TIMER2_start(uint8 initial_count);
 /**********************************************************
  * setting the pre-scaler and the initial value of the counter register 0:255
  ***********************************************************/
-void TIMER2_stop(void);
+ void TIMER2_stop(void);
 /**********************************************************
  * [TASK] : setting the pre-scaler of the timer clock as NON
  * 			which will disable the clock

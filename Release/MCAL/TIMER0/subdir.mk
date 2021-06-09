@@ -4,12 +4,15 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../MCAL/TIMER0/main_timer.c \
 ../MCAL/TIMER0/timer0.c 
 
 OBJS += \
+./MCAL/TIMER0/main_timer.o \
 ./MCAL/TIMER0/timer0.o 
 
 C_DEPS += \
+./MCAL/TIMER0/main_timer.d \
 ./MCAL/TIMER0/timer0.d 
 
 
