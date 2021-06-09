@@ -17,7 +17,6 @@
 
 #include "../MCAL/common_macros.h"
 #include "../MCAL/std_types.h"
-#include "../MCAL/registers.h"
 
 #include "../MCAL/INTERRUPT/INTERRUPT.h"
 #include "../HAL/KEYPAD/KEYPAD.h"
