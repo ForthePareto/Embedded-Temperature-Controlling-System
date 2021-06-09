@@ -19,6 +19,11 @@
 #include "../MCAL/std_types.h"
 #include "../MCAL/registers.h"
 
+#include "../MCAL/INTERRUPT/INTERRUPT.h"
+#include "../HAL/KEYPAD/KEYPAD.h"
+#include "../MCAL/SPI/SPI.h"
+#include "../HAL/LCD/LCD.h"
+
 
 #define ENABLE_GLOBAL_INTERRUPT() (SET_BIT(SREG,7))
 #define DISABLE_GLOBAL_INTERRUPT() (CLEAR_BIT(SREG,7))

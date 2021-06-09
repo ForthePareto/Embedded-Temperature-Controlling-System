@@ -1,27 +1,41 @@
 /*
-#include "MCAL/micro_config.h"
-#include "HAL/LCD/LCD.h"
-#include "MCAL/SPI/SPI.h"
+#include "micro_config.h"
+
 
 int main(void)
 {
-    // welcomescreen()
-    // IdLEscreen()
+    Interrupt_Init();
+    KEYPAD_Init();
     SPI_InitMaster();
     TC72_Init();
     LCD_Init();
 
+    // welcomescreen()
+    // IdLEscreen()
     while (1)
     {
-        uint8 str[6];
-        LCD_Print(TC72_getTemp(str));
-        LCD_DispChar('E');
-        _delay_ms(10);
-        LCD_clearscreen();
-        _delay_ms(10);
+
     }
 
     return 0;
+}
+
+ISR(INT0_vect)
+{
+    LCD_clearscreen();
+    LCD_DispChar(KeyPad_GetKeyC0());
+}
+
+ISR(INT1_vect)
+{
+	LCD_clearscreen();
+    LCD_DispChar(KeyPad_GetKeyC1());
+}
+
+ISR(INT2_vect)
+{
+    LCD_clearscreen();
+    LCD_DispChar(KeyPad_GetKeyC2());
 }
 
  */

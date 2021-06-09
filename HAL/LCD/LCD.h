@@ -1,11 +1,10 @@
 #ifndef LCD_H
-
 #define LCD_H
 
-#include "../../MCAL/DIO/DIO.h"
-#include "../../MCAL/common_macros.h"
-#include "../../MCAL/registers.h"
-#include "../../MCAL/std_types.h"
+#include "DIO.h"
+#include "common_macros.h"
+#include "registers.h"
+#include "std_types.h"
 #include <util/delay.h>
 
 #define CLR_SCREEN           0X01
