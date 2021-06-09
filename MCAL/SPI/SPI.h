@@ -1,9 +1,9 @@
 #ifndef SPI_H
 #define SPI_H
 
-
-#include "../micro_config.h"
 #include "../DIO/DIO.h"
+#include <avr/io.h>
+#include <util/delay.h>
 
 #define MOSI 5
 #define MISO 6
