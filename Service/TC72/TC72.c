@@ -2,7 +2,10 @@
 
 void TC72_Init(void)
 {
-	DIO_write('B', SS, 1);
+    // Init SPI
+    SPI_InitMaster();
+
+    DIO_write('B', SS, 1);
 	/*Select Control Register*/
 	SPI_Transmit(0x80);
 	/*Select Continuous temperature Conversion*/

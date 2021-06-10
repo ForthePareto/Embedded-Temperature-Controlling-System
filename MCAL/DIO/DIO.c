@@ -3,7 +3,9 @@
 void DIO_setPINDir(uint8 portname, uint8 pinnumber, uint8 direction) {
 	switch (portname) {
 
+
 	case 'A':
+		// MISRA :note 9225: integral expression of underlying type 'signed char' cannot be implicitly converted to type 'uint8' (aka 'unsigned char') because it is not a wider integer type of the same signedness [MISRA 2004 Rule 10.1, required]
 		if (direction == 1) {
 			SET_BIT(DDRA, pinnumber); //Set the direction of the given pin in port A as output
 		} else {
@@ -107,7 +109,12 @@ uint8 DIO_readPort(uint8 portname) {
 	case 'A':
 		for (itr = 0; itr < 8; itr++) {
 			if (READ_BIT(PINA, itr) == 1) {
+
+				// MISRA :note 9233: bitwise operator |= may not be applied to operand with signed underlying type [MISRA 2004 Rule 12.7, required]
+				// MISRA :note 9226: integral expression of underlying type 'signed char' cannot be implicitly converted to type 'uint8' (aka 'unsigned char') because it is a complex expression [MISRA 2004 Rule 10.1, required]
+				// MISRA :note 9233: bitwise operator << may not be applied to operand with signed underlying type [MISRA 2004 Rule 12.7, required]
 				return_value |= (1 << itr);
+
 			} else {
 				return_value &= (~(1 << itr));
 			}

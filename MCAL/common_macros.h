@@ -8,6 +8,9 @@
 #ifndef MCAL_COMMON_MACROS_H_
 #define MCAL_COMMON_MACROS_H_
 
+// MISRA :note 9022: unparenthesized macro parameter 'REG' in definition of macro 'SET_REG_VALUE' [MISRA 2004 Rule 19.10, required]
+// MISRA :note 9026: function-like macro, 'CLEAR_LOWER', defined [MISRA 2004 Rule 19.7, advisory]
+
 #define SET_REG_VALUE(REG, VALUE) (REG = VALUE)  //set a register with any value
 
 #define SET_BIT(REG, BIT)         (REG = REG | (1 << BIT))  // set bit in a specific register

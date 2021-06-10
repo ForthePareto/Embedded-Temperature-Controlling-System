@@ -10,7 +10,9 @@ static void (*volatile g_T0CompareInterruptFunc_ptr)(void) = NULL;
 
 static void (*volatile g_T0OverflowInterruptFunc_ptr)(void) = NULL;
 
-volatile uint8 g_T0nOverflows = 0;
+
+// MISRA :note 9225: integral expression of underlying type 'signed char' cannot be implicitly converted to type 'volatile uint8' (aka 'volatile unsigned char') because it is not a wider integer type of the same signedness [MISRA 2004 Rule 10.1, required]
+volatile uint8 g_T0nOverflows = 0 ;
 
 void TIMER0_init(const TIMER0_config *configStruct) {
 	/* Mode setting: {NORMAL , PWM_PHASE_CORRECT, CTC, FAST_PWM}*/
@@ -22,8 +24,10 @@ void TIMER0_init(const TIMER0_config *configStruct) {
 	TCNT0 = configStruct->initial_value;
 	TIMER0_setCompareValue(configStruct->compare_value);
 	/* setting the force compare bit 0 according  to the mode of the timer*/
-	if (configStruct->mode == TIMER0_NORMAL_MODE
-			|| configStruct->mode == TIMER0_CTC_MODE) {
+	// MISRA :note 9050: dependence placed on operator precedence (operators '||' and '==') [MISRA 2004 Rule 12.1, advisory]
+	// MISRA :note 9240: left side of logical operator '||' is not a primary expression [MISRA 2004 Rule 12.5, required]
+	if(configStruct->mode == TIMER0_NORMAL_MODE || configStruct->mode == TIMER0_CTC_MODE)
+	{
 		/* in case of non-pwm mode */
 		SET_BIT(TCCR0, FOC0);
 	} else {
@@ -84,7 +88,10 @@ ISR(TIMER0_COMP_vect) {
 	}
 }
 
-ISR(TIMER0_OVF_vect) {
+
+// MISRA :note 9072: parameter 1 of function 'ISR()' has different name than previous declaration ('TIMER0_OVF_vect' vs 'TIMER0_COMP_vect') [MISRA 2004 Rule 16.4, required]
+ISR(TIMER0_OVF_vect)
+{
 	/* the corresponding interrupt service routine function (IF EXIST) will be executed*/
 	if (g_T0OverflowInterruptFunc_ptr != NULL) {
 		g_T0OverflowInterruptFunc_ptr();

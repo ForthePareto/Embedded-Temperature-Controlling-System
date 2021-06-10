@@ -26,6 +26,7 @@ typedef double                float64;
 // Bool Values
 
 
+// MISRA :note 980: macro name 'ENABLE' matches a pattern reserved to the compiler because it begins with 'E' and a following uppercase letter [MISRA 2004 Rule 20.1, advisory]
 #ifndef ENABLE
 #define ENABLE        (1u)
 #endif
@@ -52,6 +53,7 @@ typedef double                float64;
 #endif
 
 
+// MISRA :note 9071: defined macro 'NULL' is reserved to the compiler [MISRA 2004 Rule 20.1, required]
 #ifndef NULL
 #define NULL (void *)0
 #endif

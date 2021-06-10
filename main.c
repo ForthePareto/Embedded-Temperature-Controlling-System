@@ -1,4 +1,3 @@
-
 #include "MCAL/micro_config.h"
 
 // SCREEN macros
@@ -9,54 +8,75 @@
 #define STANDBY   0
 #define OPERATION 1
 #define NORMAL    2
+
+// MISRA :note 980: macro name 'ERROR' matches a pattern reserved to the compiler because it begins with 'E' and a following uppercase letter [MISRA 2004 Rule 20.1, advisory]
 #define ERROR     3
 
-uint8 *defTemp = (uint8*)"25";
+volatile uint8 defTemp[2] = "25";
+uint8 crTemp[2] = "00";
+volatile uint8 Compare[2] = "25";
+volatile uint8 idx = 0x00;
 
 volatile uint8 STATE = 0;
 volatile uint8 SCREEN = 0;
 
+void compareTemp(void);
+
 int main(void)
 {
-//	delay_15ms(15,LCD_INIT); //t_delay =(prescaler/ f_cpu) *reg_size ----> reg_size =t *fcpu / prescaler
-	LCD_Init();
-    Interrupt_Init();
     KEYPAD_Init();
-    SPI_InitMaster();
     TC72_Init();
+    DISPLAY_Init();
 
-
-    // WELCOME
-    DISPLAY_Welcome();
     while (1)
     {
-        // IdLEscreen()
-        DSPLAY_IDLEscreen((uint8*)defTemp, (uint8)STATE);
-        _delay_ms(100);
+        
+        compareTemp();
+		_delay_ms(200);
     }
 
     return 0;
 }
 
-ISR(INT0_vect)
+void compareTemp(void)
 {
-    LCD_clearscreen();
-    LCD_DispChar(KeyPad_GetKeyC0());
-    STATE = OPERATION;
+    TC72_getTemp((uint8 *)crTemp);
+
+    // MISRA :warning 514: boolean argument to bitwise operator '&'
+    if((crTemp[0] != Compare[0]) & (crTemp[1] != Compare[1]))
+    {
+        Compare[0] = crTemp[0];
+        Compare[1] = crTemp[1];
+        DSPLAY_IDLEscreen((uint8*)defTemp, (uint8)STATE, crTemp);
+
+    }
 }
 
+
+
+// MISRA :warning 601: expected a type, int assumed [MISRA 2004 Rule 8.2, required]
+// MISRA :warning 533: function 'ISR' should return a value [MISRA 2004 Rule 16.8, required]
+ISR(INT0_vect)
+{
+    defTemp[idx] = KeyPad_GetKeyC0();
+    if(idx == 1) DSPLAY_IDLEscreen((uint8*)defTemp, (uint8)STATE, crTemp);
+    TOGGLE_BIT(idx, 0);
+    STATE = (uint8)OPERATION;
+}
+
+// MISRA :error 31: redefinition of symbol 'ISR'
 ISR(INT1_vect)
 {
-	LCD_clearscreen();
-    LCD_DispChar(KeyPad_GetKeyC1());
-    STATE = OPERATION;
+    defTemp[idx] = KeyPad_GetKeyC1();
+    if(idx == 1) DSPLAY_IDLEscreen((uint8*)defTemp, (uint8)STATE, crTemp);
+    TOGGLE_BIT(idx, 0);
+    STATE = (uint8)OPERATION;
 }
 
 ISR(INT2_vect)
 {
-    LCD_clearscreen();
-    LCD_DispChar(KeyPad_GetKeyC2());
-    STATE = OPERATION;
+    defTemp[idx] = KeyPad_GetKeyC2();
+    if(idx == 1) DSPLAY_IDLEscreen((uint8*)defTemp, (uint8)STATE, crTemp);
+    TOGGLE_BIT(idx, 0);
+    STATE = (uint8)OPERATION;
 }
-
-
