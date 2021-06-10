@@ -98,8 +98,14 @@ int main(void) {
 			}
 		}
 		if (CURRENT_STATE == STATE_NORMAL) {
-
-
+			if ((CURRENT_TEMP > SET_TEMP) && ((CURRENT_TEMP - SET_TEMP) > 5)) {
+				CURRENT_STATE = STATE_OPERATION;
+				DSPLAY_IDLEscreen((uint8*) setTemp, (uint8) CURRENT_STATE, crTemp);
+			} else if ((CURRENT_TEMP < SET_TEMP)
+					&& ((SET_TEMP - CURRENT_TEMP) > 5)) {
+				CURRENT_STATE = STATE_OPERATION;
+				DSPLAY_IDLEscreen((uint8*) setTemp, (uint8) CURRENT_STATE, crTemp);
+			}
 		}
 
 	}
@@ -130,8 +136,8 @@ void updateCalibrator(void) {
 }
 void setPWM(void) {
 	if (CURRENT_STATE == STATE_OPERATION) {
-		uint8 vt = (((float64) SET_TEMP - CURRENT_TEMP) / 100) * 10; //0-10
-		float64 duty = ((float64) vt * 2 * CALIBRATOR) / 100;
+		uint8 vt = (((float64) SET_TEMP - CURRENT_TEMP) / 100.0) * 10.0; //0-10
+		float64 duty = ((float64) vt * 2 * CALIBRATOR) / 100.0;
 		PWM0_restart(duty,TIMER0_F_CPU_8);
 	} else {
 		PWM0_stop();
@@ -148,7 +154,7 @@ void string_to_int_temp(uint8 * temp, uint8 * TEMP) {
 // MISRA :warning 533: function 'ISR' should return a value [MISRA 2004 Rule 16.8, required]
 ISR(INT0_vect) {
 	pressedBtn = KeyPad_GetKeyC0();
-	if ((pressedBtn == '*') && (CURRENT_STATE == STATE_OPERATION)) {
+	if ((pressedBtn == '*') && ((CURRENT_STATE == STATE_OPERATION) || (CURRENT_STATE == STATE_NORMAL))) {
 		if (idx == 1) {
 			setTemp[0] = '0';
 			setTemp[1] = usrInput[0];
@@ -161,7 +167,7 @@ ISR(INT0_vect) {
 			DSPLAY_IDLEscreen((uint8*) setTemp, (uint8) CURRENT_STATE, crTemp);
 			string_to_int_temp(setTemp, &SET_TEMP);
 		}
-	} else if (CURRENT_STATE == STATE_OPERATION) {
+	} else if ((CURRENT_STATE == STATE_OPERATION) || (CURRENT_STATE == STATE_NORMAL)) {
 		usrInput[idx] = pressedBtn;
 		TOGGLE_BIT(idx, 0);
 	}
@@ -169,7 +175,7 @@ ISR(INT0_vect) {
 
 // MISRA :error 31: redefinition of symbol 'ISR'
 ISR(INT1_vect) {
-	if (CURRENT_STATE == STATE_OPERATION) {
+	if ((CURRENT_STATE == STATE_OPERATION) || (CURRENT_STATE == STATE_NORMAL)) {
 		pressedBtn = KeyPad_GetKeyC1();
 		usrInput[idx] = pressedBtn;
 		TOGGLE_BIT(idx, 0);
@@ -186,7 +192,7 @@ ISR(INT2_vect) {
 			CURRENT_STATE = (uint8) STATE_STANDBY;
 		}
 		DSPLAY_IDLEscreen((uint8*) setTemp, (uint8) CURRENT_STATE, crTemp);
-	} else if (CURRENT_STATE == STATE_OPERATION) {
+	} else if ((CURRENT_STATE == STATE_OPERATION) || (CURRENT_STATE == STATE_NORMAL)) {
 		usrInput[idx] = pressedBtn;
 		TOGGLE_BIT(idx, 0);
 	}
