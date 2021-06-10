@@ -10,8 +10,9 @@
 #define STATE_NORMAL    2
 #define STATE_ERROR     3
 
+volatile uint8 usrInput[2] = "00";
 volatile uint8 setTemp[2] = "25"; //default 25
-uint8 crTemp[2] = "00";
+uint8 crTemp[2] = "FF";
 volatile uint8 Compare[2] = "25";
 volatile uint8 idx = 0x00;
 
@@ -28,11 +29,15 @@ int main(void)
     TC72_Init();
     DISPLAY_Init();
 
-     DISPLAY_Welcome();
+    // DISPLAY_Welcome();
+    DSPLAY_IDLEscreen((uint8*)setTemp, (uint8)STATE, crTemp);
     while (1)
     {
-        updateTemp();
-        _delay_ms(200);
+        if(STATE == STATE_OPERATION)
+        {
+            updateTemp();
+            _delay_ms(200);
+        }
     }
 
     return 0;
@@ -54,10 +59,25 @@ void updateTemp(void)
 ISR(INT0_vect)
 {
     pressedBtn = KeyPad_GetKeyC0();
-    if(STATE == STATE_OPERATION)
+    if((pressedBtn == '*') && (STATE == STATE_OPERATION))
     {
-        setTemp[idx] = pressedBtn;
-        DSPLAY_IDLEscreen((uint8*)setTemp, (uint8)STATE, crTemp);
+        if(idx == 1)
+        {
+            setTemp[0] = '0';
+            setTemp[1] = usrInput[0];
+            TOGGLE_BIT(idx, 0);
+            DSPLAY_IDLEscreen((uint8*)setTemp, (uint8)STATE, crTemp);
+        }
+        else if(idx == 0)
+        {
+            setTemp[0] = usrInput[0];
+            setTemp[1] = usrInput[1];
+            DSPLAY_IDLEscreen((uint8*)setTemp, (uint8)STATE, crTemp);
+        }
+    }
+    else if (STATE == STATE_OPERATION)    
+    {
+        usrInput[idx] = pressedBtn;
         TOGGLE_BIT(idx, 0);
     }
 }
@@ -65,19 +85,18 @@ ISR(INT0_vect)
 // MISRA :error 31: redefinition of symbol 'ISR'
 ISR(INT1_vect)
 {
-    pressedBtn = KeyPad_GetKeyC1();
     if(STATE == STATE_OPERATION)
     {
-        setTemp[idx] = pressedBtn;
-        DSPLAY_IDLEscreen((uint8*)setTemp, (uint8)STATE, crTemp);
+        pressedBtn = KeyPad_GetKeyC1();
+        usrInput[idx] = pressedBtn;
         TOGGLE_BIT(idx, 0);
     }
+    
 }
 
 ISR(INT2_vect)
 {
     pressedBtn = KeyPad_GetKeyC2();
-    // LCD_DispChar(pressedBtn);
     if(pressedBtn == (uint8)'#')
     {
         if(STATE == STATE_STANDBY)
@@ -92,8 +111,7 @@ ISR(INT2_vect)
     }
     else if(STATE == STATE_OPERATION)
     {
-        setTemp[idx] = pressedBtn;
-        DSPLAY_IDLEscreen((uint8*)setTemp, (uint8)STATE, crTemp);
+        usrInput[idx] = pressedBtn;
         TOGGLE_BIT(idx, 0);
     }
 }
