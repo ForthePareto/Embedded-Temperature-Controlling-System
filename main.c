@@ -5,12 +5,10 @@
 #define IDLE      1
 
 // STATE macros
-#define STANDBY   0
-#define OPERATION 1
-#define NORMAL    2
-
-// MISRA :note 980: macro name 'ERROR' matches a pattern reserved to the compiler because it begins with 'E' and a following uppercase letter [MISRA 2004 Rule 20.1, advisory]
-#define ERROR     3
+#define STATE_STANDBY   0
+#define STATE_OPERATION 1
+#define STATE_NORMAL    2
+#define STATE_ERROR     3
 
 volatile uint8 defTemp[2] = "25";
 uint8 crTemp[2] = "00";
@@ -30,9 +28,8 @@ int main(void)
 
     while (1)
     {
-        
         compareTemp();
-		_delay_ms(200);
+        _delay_ms(200);
     }
 
     return 0;
@@ -40,15 +37,12 @@ int main(void)
 
 void compareTemp(void)
 {
-    TC72_getTemp((uint8 *)crTemp);
-
-    // MISRA :warning 514: boolean argument to bitwise operator '&'
-    if((crTemp[0] != Compare[0]) & (crTemp[1] != Compare[1]))
+    TC72_getTemp();
+    if((crTemp[0] != Compare[0]) || (crTemp[1] != Compare[1]))
     {
         Compare[0] = crTemp[0];
         Compare[1] = crTemp[1];
         DSPLAY_IDLEscreen((uint8*)defTemp, (uint8)STATE, crTemp);
-
     }
 }
 
@@ -61,7 +55,7 @@ ISR(INT0_vect)
     defTemp[idx] = KeyPad_GetKeyC0();
     if(idx == 1) DSPLAY_IDLEscreen((uint8*)defTemp, (uint8)STATE, crTemp);
     TOGGLE_BIT(idx, 0);
-    STATE = (uint8)OPERATION;
+    STATE = (uint8)STATE_OPERATION;
 }
 
 // MISRA :error 31: redefinition of symbol 'ISR'
@@ -70,7 +64,7 @@ ISR(INT1_vect)
     defTemp[idx] = KeyPad_GetKeyC1();
     if(idx == 1) DSPLAY_IDLEscreen((uint8*)defTemp, (uint8)STATE, crTemp);
     TOGGLE_BIT(idx, 0);
-    STATE = (uint8)OPERATION;
+    STATE = (uint8)STATE_OPERATION;
 }
 
 ISR(INT2_vect)
@@ -78,5 +72,5 @@ ISR(INT2_vect)
     defTemp[idx] = KeyPad_GetKeyC2();
     if(idx == 1) DSPLAY_IDLEscreen((uint8*)defTemp, (uint8)STATE, crTemp);
     TOGGLE_BIT(idx, 0);
-    STATE = (uint8)OPERATION;
+    STATE = (uint8)STATE_OPERATION;
 }
