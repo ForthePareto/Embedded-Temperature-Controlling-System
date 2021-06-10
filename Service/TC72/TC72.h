@@ -9,5 +9,6 @@ extern uint8 crTemp[2];
 void TC72_Init(void);
 void TC72_getTemp(void);
 uint8 convertIntChar(uint8 num);
+uint8 convertCharInt(uint8 character);
 
 #endif //TC72_H
