@@ -20,7 +20,7 @@ volatile uint8 pressedBtn = 'F';
 volatile uint8 STATE = 0;
 volatile uint8 SCREEN = 0;
 
-void compareTemp(void);
+void updateTemp(void);
 
 int main(void)
 {
@@ -28,23 +28,24 @@ int main(void)
     TC72_Init();
     DISPLAY_Init();
 
+    DISPLAY_Welcome();
     while (1)
     {
-        compareTemp();
+        updateTemp();
         _delay_ms(200);
     }
 
     return 0;
 }
 
-void compareTemp(void)
+void updateTemp(void)
 {
     TC72_getTemp();
     if((crTemp[0] != Compare[0]) || (crTemp[1] != Compare[1]))
     {
         Compare[0] = crTemp[0];
         Compare[1] = crTemp[1];
-        DSPLAY_IDLEscreen((uint8*)defTemp, (uint8)STATE, crTemp);
+        DSPLAY_IDLEscreen((uint8*)setTemp, (uint8)STATE, crTemp);
     }
 }
 
