@@ -132,7 +132,7 @@ void setPWM(void) {
 	if (CURRENT_STATE == STATE_OPERATION) {
 		uint8 vt = (((float64) SET_TEMP - CURRENT_TEMP) / 100) * 10; //0-10
 		float64 duty = ((float64) vt * 2 * CALIBRATOR) / 100;
-		PWM0_start(duty);
+		PWM0_restart(duty,TIMER0_F_CPU_8);
 	} else {
 		PWM0_stop();
 	}

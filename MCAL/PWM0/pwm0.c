@@ -17,10 +17,11 @@ void PWM0_init(TIMER0_clock prescaler, uint8 PWM_MODE) {
 
 }
 
-void PWM0_start(float64 duty) {
+void PWM0_restart(float64 duty,TIMER0_clock prescaler) {
 
 
 	// MISRA :note 9225: integral expression of underlying type 'short' cannot be implicitly converted to type 'float' because it is not a wider integer type of the same signedness [MISRA 2004 Rule 10.1, required]
+	TIMER0_restart(0 ,prescaler) ;
 	float64 reg_val = 256* duty ;
 	TIMER0_setCompareValue((uint8)reg_val) ;
 
