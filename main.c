@@ -2,6 +2,7 @@
 #include "MCAL/TIMER1/timer1.h"
 #include "MCAL/ADC/adc.h"
 #include "MCAL/PWM0/PWM0.h"
+#include "Service/SCHEDULAR/schedular.h"
 
 // STATE macros
 #define STATE_STANDBY   0
@@ -49,17 +50,18 @@ void update_time(void) {
 
 	}
 
-	if ((g_T1nOverflows % 1800 == 0)
-			&& ((CURRENT_STATE == STATE_NORMAL)
-					|| (CURRENT_STATE == STATE_OPERATION))) //ERROR
-			{
-		CHECK_ADC = ENABLE;
-
-	}
+//	if ((g_T1nOverflows % 1800 == 0)
+//			&& ((CURRENT_STATE == STATE_NORMAL)
+//					|| (CURRENT_STATE == STATE_OPERATION))) //ERROR
+//			{
+//		CHECK_ADC = ENABLE;
+//
+//	}
 
 }
 
 int main(void) {
+	init_schedular(update_time) ;
 	KEYPAD_Init();
 	TC72_Init();
 	DISPLAY_Init();

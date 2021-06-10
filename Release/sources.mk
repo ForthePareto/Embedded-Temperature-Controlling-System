@@ -34,6 +34,7 @@ MCAL/TIMER1 \
 MCAL/TIMER2 \
 Service/DISPLAY \
 Service/HEATER_CONTROL \
+Service/SCHEDULAR \
 Service/TC72 \
 . \
 

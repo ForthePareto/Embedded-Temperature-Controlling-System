@@ -31,12 +31,12 @@ typedef struct {
 	uint8 overflow_interrupt;
 	uint16 compare_value;
 	uint16 initial_value;
-} TIMER1_configType;
+} TIMER1_config;
 
 /*********************************************************************************
  * 								Function Declarations							 *
  *********************************************************************************/
-void TIMER1_init(const TIMER1_configType *config_ptr);
+void TIMER1_init(const TIMER1_config *config_ptr);
 void TIMER1_restart(uint16 initial_count, TIMER1_clock clk);
 void TIMER1_setCompareValue(uint16 value);
 void TIMER1_stop(void);

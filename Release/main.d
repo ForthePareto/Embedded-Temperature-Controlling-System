@@ -18,7 +18,10 @@ main.o main.o: ../main.c ../MCAL/micro_config.h \
   ../MCAL/TIMER1/timer1.h ../MCAL/TIMER1/../micro_config.h \
   ../MCAL/ADC/adc.h ../MCAL/ADC/../micro_config.h ../MCAL/PWM0/PWM0.h \
   ../MCAL/PWM0/../TIMER0/timer0.h \
-  ../MCAL/PWM0/../TIMER0/../micro_config.h
+  ../MCAL/PWM0/../TIMER0/../micro_config.h \
+  ../Service/SCHEDULAR/schedular.h \
+  ../Service/SCHEDULAR/../../MCAL/micro_config.h \
+  ../Service/SCHEDULAR/../../MCAL/TIMER1/timer1.h
 
 ../MCAL/micro_config.h:
 
@@ -69,3 +72,9 @@ main.o main.o: ../main.c ../MCAL/micro_config.h \
 ../MCAL/PWM0/../TIMER0/timer0.h:
 
 ../MCAL/PWM0/../TIMER0/../micro_config.h:
+
+../Service/SCHEDULAR/schedular.h:
+
+../Service/SCHEDULAR/../../MCAL/micro_config.h:
+
+../Service/SCHEDULAR/../../MCAL/TIMER1/timer1.h:
