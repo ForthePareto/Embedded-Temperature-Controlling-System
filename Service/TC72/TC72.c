@@ -19,7 +19,6 @@ void TC72_getTemp(void)
     uint8 msb = 0;
     // uint8 lsb = 0;
     uint8 temp = 0;
-    uint8 changed = 0;
 
     DIO_write('B', SS, 1);
     /*Read the MSB*/
@@ -86,13 +85,6 @@ void TC72_getTemp(void)
 			crTemp[5] = '9';
 			break;
 	} */
-    
-    /* if((crTemp[0] != Compare[0]) & (crTemp[1] != Compare[1]))
-    {
-        Compare[0] = crTemp[0];
-        Compare[1] = crTemp[1];
-        changed = 1;
-    } */
 }
 
 uint8 convertIntChar(uint8 num)
