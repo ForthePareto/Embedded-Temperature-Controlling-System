@@ -75,19 +75,23 @@ int main(void) {
 		if (CURRENT_STATE == STATE_OPERATION) {
 			if ((CURRENT_TEMP > SET_TEMP) && ((CURRENT_TEMP - SET_TEMP) <= 5)) {
 				CURRENT_STATE = STATE_NORMAL;
+				DSPLAY_IDLEscreen((uint8*) setTemp, (uint8) CURRENT_STATE, crTemp);
 			} else if ((CURRENT_TEMP < SET_TEMP)
 					&& ((SET_TEMP - CURRENT_TEMP) <= 5)) {
 				CURRENT_STATE = STATE_NORMAL;
+				DSPLAY_IDLEscreen((uint8*) setTemp, (uint8) CURRENT_STATE, crTemp);
 
 			} else if ((CURRENT_TEMP > SET_TEMP)
 					&& ((CURRENT_TEMP - SET_TEMP) > 10)) {
 
 				CURRENT_STATE = STATE_ERROR;
+				DSPLAY_IDLEscreen((uint8*) setTemp, (uint8) CURRENT_STATE, crTemp);
 			} else if ((SET_TEMP > CURRENT_TEMP)
 					&& ((SET_TEMP - CURRENT_TEMP) > 5)) {
 				// for 3 minutes
 
 				CURRENT_STATE = STATE_ERROR;
+				DSPLAY_IDLEscreen((uint8*) setTemp, (uint8) CURRENT_STATE, crTemp);
 
 			}
 		}
