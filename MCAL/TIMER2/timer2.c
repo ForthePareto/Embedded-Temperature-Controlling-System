@@ -13,7 +13,7 @@ static void (*volatile g_T2OverflowInterruptFunc_ptr)(void) = NULL;
 
 
 // MISRA :note 9225: integral expression of underlying type 'signed char' cannot be implicitly converted to type 'volatile uint8' (aka 'volatile unsigned char') because it is not a wider integer type of the same signedness [MISRA 2004 Rule 10.1, required]
-volatile uint8 g_T2nOverflows = 0 ;
+volatile uint8 g_T2nOverflows = (uint8)0 ;
 
 void TIMER2_init(const TIMER2_config *configStruct) {
 	/* Mode setting: {NORMAL , PWM_PHASE_CORRECT, CTC, FAST_PWM}*/
@@ -29,7 +29,7 @@ void TIMER2_init(const TIMER2_config *configStruct) {
 	// MISRA :note 9050: dependence placed on operator precedence (operators '||' and '==') [MISRA 2004 Rule 12.1, advisory]
 	// MISRA :note 9240: right side of logical operator '||' is not a primary expression [MISRA 2004 Rule 12.5, required]
 
-	if(configStruct->mode == TIMER2_NORMAL_MODE || configStruct->mode == TIMER2_CTC_MODE)
+	if((configStruct->mode == TIMER2_NORMAL_MODE) || (configStruct->mode == TIMER2_CTC_MODE))
 	{
 		/* in case of non-pwm mode */
 		SET_BIT(TCCR2, FOC2);
@@ -47,18 +47,18 @@ void TIMER2_init(const TIMER2_config *configStruct) {
 			| ((configStruct->compare_interrupt) << OCIE2);
 
 	/* starting the timer NOW after all settings is done*/
-	SET_VALUE(TCCR2, CS00, READ_BIT(configStruct ->clock,CS20));
-	SET_VALUE(TCCR2, CS00, READ_BIT(configStruct ->clock,CS21));
-	SET_VALUE(TCCR2, CS00, READ_BIT(configStruct ->clock,CS22));
+	SET_VALUE(TCCR2, CS20, READ_BIT(configStruct ->clock,CS20));
+	SET_VALUE(TCCR2, CS21, READ_BIT(configStruct ->clock,CS21));
+	SET_VALUE(TCCR2, CS22, READ_BIT(configStruct ->clock,CS22));
 	/* enabling the global interrupt */
 	ENABLE_GLOBAL_INTERRUPT();
 }
 
 void TIMER2_restart(uint8 initial_count, TIMER2_clock clk) {
 	/* setting the pre-scaler (assuming their bits are initially zeros) and the initial value of the counter register 0:255 */
-	SET_VALUE(TCCR2, CS00, READ_BIT(clk,CS20));
-	SET_VALUE(TCCR2, CS00, READ_BIT(clk,CS21));
-	SET_VALUE(TCCR2, CS00, READ_BIT(clk,CS22));
+	SET_VALUE(TCCR2, CS20, READ_BIT(clk,CS20));
+	SET_VALUE(TCCR2, CS21, READ_BIT(clk,CS21));
+	SET_VALUE(TCCR2, CS22, READ_BIT(clk,CS22));
 	TCNT2 = initial_count;
 }
 

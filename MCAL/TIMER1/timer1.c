@@ -11,41 +11,32 @@ static void (*volatile g_T1CompareInterruptFunc_ptr)(void) = NULL;
 
 static void (*volatile g_T1OverflowInterruptFunc_ptr)(void) = NULL;
 
-volatile uint8 g_T1nOverflows = 0;
+volatile uint8 g_T1nOverflows = (uint8) 0;
 
+void TIMER1_init(const TIMER1_configType *configStruct) {
+	TCCR1A = (1 << FOC1A) | (1 << FOC1B) | (configStruct->mode & 0xFF);
 
+	TCCR1B = (configStruct->mode >> 8);
 
-void TIMER1_setCompareModeCallBack(void (*a_ptr)(void)) {
-	g_T1CompareInterruptFunc_ptr = a_ptr;
-}
+	TCNT1 = configStruct->initial_value;
 
-void TIMER1_setOverflowModeCallBack(void (*a_ptr)(void)) {
-	g_T1OverflowInterruptFunc_ptr = a_ptr;
-}
+	OCR1A = configStruct->compare_value;
 
-void TIMER1_init(const TIMER1_configType *config_ptr) {
-	TCCR1A = (1 << FOC1A) | (1 << FOC1B) | (config_ptr->mode & 0xFF);
+	TIMSK |= (configStruct->overflow_interrupt << TOIE1)
+			| ((configStruct->compare_interrupt) << OCIE1A);
 
+	TCCR1B |= configStruct->clock;
 
-	TCCR1B = (config_ptr->mode >> 8);
-
-	TCNT1 = config_ptr->initial_value;
-
-
-	OCR1A = config_ptr->compare_value;
-
-
-	TIMSK |= (config_ptr->overflow_interrupt << TOIE1)
-			| ((config_ptr->compare_interrupt) << OCIE1A);
-
-	TCCR1B |= config_ptr->clock;
+	SET_VALUE(TCCR1B, 0, READ_BIT(configStruct ->clock,0));
+	SET_VALUE(TCCR1B, 1, READ_BIT(configStruct ->clock,1));
+	SET_VALUE(TCCR1B, 2, READ_BIT(configStruct ->clock,2));
 
 	ENABLE_GLOBAL_INTERRUPT();
 }
 
-void TIMER1_start(TIMER1_clock clk) {
+void TIMER1_restart(uint16 initial_count,TIMER1_clock clk) {
 	TCCR1B |= clk;
-	TCNT1 = 0;
+	TCNT1 =  initial_count;
 }
 
 void TIMER1_setCompareValue(uint16 value) {
@@ -56,8 +47,16 @@ void TIMER1_stop(void) {
 	CLEAR_BIT(TCCR1B, 0);
 	CLEAR_BIT(TCCR1B, 1);
 	CLEAR_BIT(TCCR1B, 2);
+	TCNT1 = 0;
 }
 
+void TIMER1_setCompareModeCallBack(void (*a_ptr)(void)) {
+	g_T1CompareInterruptFunc_ptr = a_ptr;
+}
+
+void TIMER1_setOverflowModeCallBack(void (*a_ptr)(void)) {
+	g_T1OverflowInterruptFunc_ptr = a_ptr;
+}
 
 ISR(TIMER1_COMPA_vect) {
 	TCNT1 = 0;

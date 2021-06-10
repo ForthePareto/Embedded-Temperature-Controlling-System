@@ -37,10 +37,8 @@ typedef struct {
  * 								Function Declarations							 *
  *********************************************************************************/
 void TIMER1_init(const TIMER1_configType *config_ptr);
-
+void TIMER1_restart(uint16 initial_count, TIMER1_clock clk);
 void TIMER1_setCompareValue(uint16 value);
-
-void TIMER1_start(TIMER1_clock clk);
 void TIMER1_stop(void);
 void TIMER1_setCompareModeCallBack(void (*a_ptr)(void));
 void TIMER1_setOverflowModeCallBack(void (*a_ptr)(void));

@@ -3,7 +3,7 @@
 
 #include "../../MCAL/micro_config.h"
 #include "../../MCAL/DIO/DIO.h"
-#include "../MCAL/INTERRUPT/INTERRUPT.h"
+#include "../../MCAL/INTERRUPT/INTERRUPT.h"
 
 #define R0 4
 #define R1 5
