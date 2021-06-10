@@ -91,10 +91,8 @@ int main(void) {
 			else if ((SET_TEMP > CURRENT_TEMP)
 					&& ((SET_TEMP - CURRENT_TEMP) > 5)) {
 				// for 3 minutes
-
 				//CURRENT_STATE = STATE_ERROR;
 				//DSPLAY_IDLEscreen((uint8*) setTemp, (uint8) CURRENT_STATE, crTemp);
-
 			}
 		}
 		if (CURRENT_STATE == STATE_NORMAL) {
@@ -128,17 +126,17 @@ void updateTemp(void) {
 
 void updateCalibrator(void) {
 	if (CHECK_ADC == ENABLE) {
-
 		ADC_readChannel(&adc_config, ADC0);
-		CALIBRATOR = (float64) ADC_reading / 1024.0;
+		CALIBRATOR = (float64)ADC_reading / 1024.0; //0-1
 		CHECK_ADC = DISABLE;
 	}
 }
 void setPWM(void) {
 	if (CURRENT_STATE == STATE_OPERATION) {
-		uint8 vt = (((float64) SET_TEMP - CURRENT_TEMP) / 100.0) * 10.0; //0-10
-		float64 duty = ((float64) vt * 2 * CALIBRATOR) / 100.0;
+		float64 vt = (((float64)SET_TEMP - CURRENT_TEMP) / 10.0); //0-1
+		float64 duty = (vt * CALIBRATOR);
 		PWM0_restart(duty,TIMER0_F_CPU_8);
+		//PWM0_restart(0.5,TIMER0_F_CPU_8);
 	} else {
 		PWM0_stop();
 	}
