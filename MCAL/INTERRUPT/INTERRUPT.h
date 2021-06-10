@@ -1,8 +1,6 @@
 #ifndef INTERRUPT_H
 #define INTERRUPT_H
 
-
-
 #include "../micro_config.h"
 #include "../DIO/DIO.h"
 

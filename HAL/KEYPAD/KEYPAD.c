@@ -27,7 +27,7 @@ uint8 KeyPad_GetKeyC0(void)
 
     uint8 itr = 0;
     uint8 found = 0;
-    while ((found == 0) & (itr < 4))
+    while ((found == 0) && (itr < 4))
     {
         DIO_write('D', Rows[itr], 1);
         if(DIO_readPin('D',2) == 1)
@@ -49,7 +49,7 @@ uint8 KeyPad_GetKeyC1(void)
 
     uint8 itr = 0;
     uint8 found = 0;
-    while ((found == 0) & (itr < 4))
+    while ((found == 0) && (itr < 4))
     {
         DIO_write('D', Rows[itr], 1);
         if(DIO_readPin('D',3) == 1)
@@ -71,7 +71,7 @@ uint8 KeyPad_GetKeyC2(void)
 
     uint8 itr = 0;
     uint8 found = 0;
-    while ((found == 0) & (itr < 4))
+    while ((found == 0) && (itr < 4))
     {
         DIO_write('D', Rows[itr], 1);
         if(DIO_readPin('B',2) == 1)
