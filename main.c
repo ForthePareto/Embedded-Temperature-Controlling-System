@@ -10,7 +10,7 @@
 #define STATE_NORMAL    2
 #define STATE_ERROR     3
 
-volatile uint8 setTemp[2] = "25";
+volatile uint8 setTemp[2] = "25"; //default 25
 uint8 crTemp[2] = "00";
 volatile uint8 Compare[2] = "25";
 volatile uint8 idx = 0x00;
@@ -28,7 +28,7 @@ int main(void)
     TC72_Init();
     DISPLAY_Init();
 
-    DISPLAY_Welcome();
+    // DISPLAY_Welcome();
     while (1)
     {
         updateTemp();
@@ -48,8 +48,6 @@ void updateTemp(void)
         DSPLAY_IDLEscreen((uint8*)setTemp, (uint8)STATE, crTemp);
     }
 }
-
-
 
 // MISRA :warning 601: expected a type, int assumed [MISRA 2004 Rule 8.2, required]
 // MISRA :warning 533: function 'ISR' should return a value [MISRA 2004 Rule 16.8, required]
