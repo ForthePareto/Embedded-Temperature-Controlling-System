@@ -15,6 +15,8 @@ uint8 crTemp[2] = "00";
 volatile uint8 Compare[2] = "25";
 volatile uint8 idx = 0x00;
 
+volatile uint8 pressedBtn = 'F';
+
 volatile uint8 STATE = 0;
 volatile uint8 SCREEN = 0;
 
@@ -52,25 +54,45 @@ void compareTemp(void)
 // MISRA :warning 533: function 'ISR' should return a value [MISRA 2004 Rule 16.8, required]
 ISR(INT0_vect)
 {
-    defTemp[idx] = KeyPad_GetKeyC0();
-    if(idx == 1) DSPLAY_IDLEscreen((uint8*)defTemp, (uint8)STATE, crTemp);
-    TOGGLE_BIT(idx, 0);
-    STATE = (uint8)STATE_OPERATION;
+    pressedBtn = KeyPad_GetKeyC0();
+    if(pressedBtn == '#')
+    {
+        if(STATE == STATE_STANDBY)
+        {
+            STATE = (uint8)STATE_OPERATION;
+        }
+        if(STATE == STATE_OPERATION)
+        {
+            STATE = (uint8)STATE_STANDBY;
+        }
+    }
+    else if(STATE == STATE_OPERATION)
+    {
+        defTemp[idx] = pressedBtn;
+        DSPLAY_IDLEscreen((uint8*)defTemp, (uint8)STATE, crTemp);
+        TOGGLE_BIT(idx, 0);
+    }
 }
 
 // MISRA :error 31: redefinition of symbol 'ISR'
 ISR(INT1_vect)
 {
-    defTemp[idx] = KeyPad_GetKeyC1();
-    if(idx == 1) DSPLAY_IDLEscreen((uint8*)defTemp, (uint8)STATE, crTemp);
-    TOGGLE_BIT(idx, 0);
-    STATE = (uint8)STATE_OPERATION;
+    pressedBtn = KeyPad_GetKeyC1();
+    if(STATE == STATE_OPERATION)
+    {
+        defTemp[idx] = pressedBtn;
+        DSPLAY_IDLEscreen((uint8*)defTemp, (uint8)STATE, crTemp);
+        TOGGLE_BIT(idx, 0);
+    }
 }
 
 ISR(INT2_vect)
 {
-    defTemp[idx] = KeyPad_GetKeyC2();
-    if(idx == 1) DSPLAY_IDLEscreen((uint8*)defTemp, (uint8)STATE, crTemp);
-    TOGGLE_BIT(idx, 0);
-    STATE = (uint8)STATE_OPERATION;
+    pressedBtn = KeyPad_GetKeyC2();
+    if(STATE == STATE_OPERATION)
+    {
+        defTemp[idx] = pressedBtn;
+        DSPLAY_IDLEscreen((uint8*)defTemp, (uint8)STATE, crTemp);
+        TOGGLE_BIT(idx, 0);
+    }
 }
