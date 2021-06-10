@@ -85,13 +85,6 @@ void TC72_getTemp(void)
 			crTemp[5] = '9';
 			break;
 	} */
-    
-    /* if((crTemp[0] != Compare[0]) & (crTemp[1] != Compare[1]))
-    {
-        Compare[0] = crTemp[0];
-        Compare[1] = crTemp[1];
-        changed = 1;
-    } */
 }
 
 uint8 convertIntChar(uint8 num)
