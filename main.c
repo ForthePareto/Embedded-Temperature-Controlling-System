@@ -55,18 +55,7 @@ void compareTemp(void)
 ISR(INT0_vect)
 {
     pressedBtn = KeyPad_GetKeyC0();
-    if(pressedBtn == '#')
-    {
-        if(STATE == STATE_STANDBY)
-        {
-            STATE = (uint8)STATE_OPERATION;
-        }
-        if(STATE == STATE_OPERATION)
-        {
-            STATE = (uint8)STATE_STANDBY;
-        }
-    }
-    else if(STATE == STATE_OPERATION)
+    if(STATE == STATE_OPERATION)
     {
         defTemp[idx] = pressedBtn;
         DSPLAY_IDLEscreen((uint8*)defTemp, (uint8)STATE, crTemp);
@@ -89,7 +78,20 @@ ISR(INT1_vect)
 ISR(INT2_vect)
 {
     pressedBtn = KeyPad_GetKeyC2();
-    if(STATE == STATE_OPERATION)
+    // LCD_DispChar(pressedBtn);
+    if(pressedBtn == (uint8)'#')
+    {
+        if(STATE == STATE_STANDBY)
+        {
+            STATE = (uint8)STATE_OPERATION;
+        }
+        else if(STATE == STATE_OPERATION)
+        {
+            STATE = (uint8)STATE_STANDBY;
+        }
+        DSPLAY_IDLEscreen((uint8*)defTemp, (uint8)STATE, crTemp);
+    }
+    else if(STATE == STATE_OPERATION)
     {
         defTemp[idx] = pressedBtn;
         DSPLAY_IDLEscreen((uint8*)defTemp, (uint8)STATE, crTemp);
