@@ -10,16 +10,15 @@
 #define STATE_NORMAL    2
 #define STATE_ERROR     3
 
-volatile uint8 usrInput[2] = "00";
+volatile uint8 usrInput[2] = "25";
 uint8 setTemp[2] = "25"; //default 25
-uint8 crTemp[2] = "FF";
+uint8 crTemp[2] = "25";
 volatile uint8 Compare[2] = "25";
 volatile uint8 idx = 0x00;
 
 volatile uint8 pressedBtn = 'F';
 
 volatile uint8 CURRENT_STATE = 0;
-volatile uint8 SCREEN = 0;
 uint8 SET_TEMP = 25;
 uint8 CURRENT_TEMP = 25;
 volatile uint8 CHECK_TEMP = ENABLE;
@@ -88,12 +87,13 @@ int main(void) {
 
 				CURRENT_STATE = STATE_ERROR;
 				DSPLAY_IDLEscreen((uint8*) setTemp, (uint8) CURRENT_STATE, crTemp);
-			} else if ((SET_TEMP > CURRENT_TEMP)
+			} 
+			else if ((SET_TEMP > CURRENT_TEMP)
 					&& ((SET_TEMP - CURRENT_TEMP) > 5)) {
 				// for 3 minutes
 
-				CURRENT_STATE = STATE_ERROR;
-				DSPLAY_IDLEscreen((uint8*) setTemp, (uint8) CURRENT_STATE, crTemp);
+				//CURRENT_STATE = STATE_ERROR;
+				//DSPLAY_IDLEscreen((uint8*) setTemp, (uint8) CURRENT_STATE, crTemp);
 
 			}
 		}
