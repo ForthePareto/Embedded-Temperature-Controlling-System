@@ -8,14 +8,13 @@ void DISPLAY_Init(void)
 void DISPLAY_Welcome(void)
 {
     LCD_clearscreen();
-    LCD_SendCommand(0x0c);
     for (uint8 itr = 0; itr < 16; itr++)
     {
-        LCD_SendCommand(DECREMENT_CURSOR);
+        LCD_SendCommand(SHIFT_CURSOR_RIGHT);
     }
     LCD_DispChar('W');
     LCD_SendCommand(SHIFT_LEFT);
-    //LCD_SendCommand(0x14);
+    _delay_ms(100);
     LCD_DispChar('E');
     LCD_SendCommand(SHIFT_LEFT);
     _delay_ms(100);
@@ -34,6 +33,7 @@ void DISPLAY_Welcome(void)
     LCD_DispChar('E');
     LCD_SendCommand(SHIFT_LEFT);
     _delay_ms(100);
+
     for (uint8 i = 0; i < 3; i++)
     {
         for (uint8 itr = 0; itr < 9; itr++)
@@ -50,11 +50,11 @@ void DISPLAY_Welcome(void)
     LCD_SendCommand(DISPLAY_ON_CURSOR_ON);
 }
 
-void DSPLAY_IDLEscreen(uint8 * defTemp, uint8 STATE, uint8 * crTemp)
+void DSPLAY_IDLEscreen(uint8 * setTemp, uint8 STATE, uint8 * crTemp)
 {
     LCD_clearscreen();
     LCD_Print((uint8 *)"SET:");
-    LCD_PrintString((uint8 *)defTemp,2);
+    LCD_PrintString((uint8 *)setTemp,2);
     for (uint8 itr = 0; itr < 4;itr++)
     {
         LCD_SendCommand(SHIFT_CURSOR_RIGHT);
