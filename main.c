@@ -10,7 +10,7 @@
 #define STATE_NORMAL    2
 #define STATE_ERROR     3
 
-volatile uint8 defTemp[2] = "25";
+volatile uint8 setTemp[2] = "25";
 uint8 crTemp[2] = "00";
 volatile uint8 Compare[2] = "25";
 volatile uint8 idx = 0x00;
@@ -58,8 +58,8 @@ ISR(INT0_vect)
     pressedBtn = KeyPad_GetKeyC0();
     if(STATE == STATE_OPERATION)
     {
-        defTemp[idx] = pressedBtn;
-        DSPLAY_IDLEscreen((uint8*)defTemp, (uint8)STATE, crTemp);
+        setTemp[idx] = pressedBtn;
+        DSPLAY_IDLEscreen((uint8*)setTemp, (uint8)STATE, crTemp);
         TOGGLE_BIT(idx, 0);
     }
 }
@@ -70,8 +70,8 @@ ISR(INT1_vect)
     pressedBtn = KeyPad_GetKeyC1();
     if(STATE == STATE_OPERATION)
     {
-        defTemp[idx] = pressedBtn;
-        DSPLAY_IDLEscreen((uint8*)defTemp, (uint8)STATE, crTemp);
+        setTemp[idx] = pressedBtn;
+        DSPLAY_IDLEscreen((uint8*)setTemp, (uint8)STATE, crTemp);
         TOGGLE_BIT(idx, 0);
     }
 }
@@ -90,12 +90,12 @@ ISR(INT2_vect)
         {
             STATE = (uint8)STATE_STANDBY;
         }
-        DSPLAY_IDLEscreen((uint8*)defTemp, (uint8)STATE, crTemp);
+        DSPLAY_IDLEscreen((uint8*)setTemp, (uint8)STATE, crTemp);
     }
     else if(STATE == STATE_OPERATION)
     {
-        defTemp[idx] = pressedBtn;
-        DSPLAY_IDLEscreen((uint8*)defTemp, (uint8)STATE, crTemp);
+        setTemp[idx] = pressedBtn;
+        DSPLAY_IDLEscreen((uint8*)setTemp, (uint8)STATE, crTemp);
         TOGGLE_BIT(idx, 0);
     }
 }
