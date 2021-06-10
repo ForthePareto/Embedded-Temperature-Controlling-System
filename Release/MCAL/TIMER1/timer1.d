@@ -16,10 +16,8 @@ MCAL/TIMER1/timer1.o MCAL/TIMER1/timer1.o: ../MCAL/TIMER1/timer1.c \
   ../MCAL/TIMER1/../../HAL/LCD/../../MCAL/micro_config.h \
   ../MCAL/TIMER1/../../HAL/LCD/../../MCAL/DIO/DIO.h \
   ../MCAL/TIMER1/../../Service/DISPLAY/DISPLAY.h \
-  ../MCAL/TIMER1/../../Service/DISPLAY/../../MCAL/micro_config.h \
   ../MCAL/TIMER1/../../Service/DISPLAY/../../HAL/LCD/LCD.h \
   ../MCAL/TIMER1/../../Service/TC72/TC72.h \
-  ../MCAL/TIMER1/../../Service/TC72/../../MCAL/micro_config.h \
   ../MCAL/TIMER1/../../Service/TC72/../../MCAL/SPI/SPI.h
 
 ../MCAL/TIMER1/timer1.h:
@@ -58,12 +56,8 @@ MCAL/TIMER1/timer1.o MCAL/TIMER1/timer1.o: ../MCAL/TIMER1/timer1.c \
 
 ../MCAL/TIMER1/../../Service/DISPLAY/DISPLAY.h:
 
-../MCAL/TIMER1/../../Service/DISPLAY/../../MCAL/micro_config.h:
-
 ../MCAL/TIMER1/../../Service/DISPLAY/../../HAL/LCD/LCD.h:
 
 ../MCAL/TIMER1/../../Service/TC72/TC72.h:
-
-../MCAL/TIMER1/../../Service/TC72/../../MCAL/micro_config.h:
 
 ../MCAL/TIMER1/../../Service/TC72/../../MCAL/SPI/SPI.h:

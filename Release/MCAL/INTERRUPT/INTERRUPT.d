@@ -15,10 +15,8 @@ MCAL/INTERRUPT/INTERRUPT.o MCAL/INTERRUPT/INTERRUPT.o:  \
   ../MCAL/INTERRUPT/../../HAL/LCD/../../MCAL/micro_config.h \
   ../MCAL/INTERRUPT/../../HAL/LCD/../../MCAL/DIO/DIO.h \
   ../MCAL/INTERRUPT/../../Service/DISPLAY/DISPLAY.h \
-  ../MCAL/INTERRUPT/../../Service/DISPLAY/../../MCAL/micro_config.h \
   ../MCAL/INTERRUPT/../../Service/DISPLAY/../../HAL/LCD/LCD.h \
   ../MCAL/INTERRUPT/../../Service/TC72/TC72.h \
-  ../MCAL/INTERRUPT/../../Service/TC72/../../MCAL/micro_config.h \
   ../MCAL/INTERRUPT/../../Service/TC72/../../MCAL/SPI/SPI.h \
   ../MCAL/INTERRUPT/../DIO/DIO.h
 
@@ -54,13 +52,9 @@ MCAL/INTERRUPT/INTERRUPT.o MCAL/INTERRUPT/INTERRUPT.o:  \
 
 ../MCAL/INTERRUPT/../../Service/DISPLAY/DISPLAY.h:
 
-../MCAL/INTERRUPT/../../Service/DISPLAY/../../MCAL/micro_config.h:
-
 ../MCAL/INTERRUPT/../../Service/DISPLAY/../../HAL/LCD/LCD.h:
 
 ../MCAL/INTERRUPT/../../Service/TC72/TC72.h:
-
-../MCAL/INTERRUPT/../../Service/TC72/../../MCAL/micro_config.h:
 
 ../MCAL/INTERRUPT/../../Service/TC72/../../MCAL/SPI/SPI.h:
 

@@ -19,7 +19,6 @@ void TC72_getTemp(void)
     uint8 msb = 0;
     // uint8 lsb = 0;
     uint8 temp = 0;
-    uint8 changed = 0;
 
     DIO_write('B', SS, 1);
     /*Read the MSB*/

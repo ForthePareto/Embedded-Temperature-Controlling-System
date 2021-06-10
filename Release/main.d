@@ -12,10 +12,8 @@ main.o main.o: ../main.c ../MCAL/micro_config.h \
   ../MCAL/../HAL/LCD/LCD.h ../MCAL/../HAL/LCD/../../MCAL/micro_config.h \
   ../MCAL/../HAL/LCD/../../MCAL/DIO/DIO.h \
   ../MCAL/../Service/DISPLAY/DISPLAY.h \
-  ../MCAL/../Service/DISPLAY/../../MCAL/micro_config.h \
   ../MCAL/../Service/DISPLAY/../../HAL/LCD/LCD.h \
   ../MCAL/../Service/TC72/TC72.h \
-  ../MCAL/../Service/TC72/../../MCAL/micro_config.h \
   ../MCAL/../Service/TC72/../../MCAL/SPI/SPI.h
 
 ../MCAL/micro_config.h:
@@ -52,12 +50,8 @@ main.o main.o: ../main.c ../MCAL/micro_config.h \
 
 ../MCAL/../Service/DISPLAY/DISPLAY.h:
 
-../MCAL/../Service/DISPLAY/../../MCAL/micro_config.h:
-
 ../MCAL/../Service/DISPLAY/../../HAL/LCD/LCD.h:
 
 ../MCAL/../Service/TC72/TC72.h:
-
-../MCAL/../Service/TC72/../../MCAL/micro_config.h:
 
 ../MCAL/../Service/TC72/../../MCAL/SPI/SPI.h:

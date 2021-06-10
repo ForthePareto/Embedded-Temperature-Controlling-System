@@ -14,10 +14,8 @@ MCAL/ADC/adc.o MCAL/ADC/adc.o: ../MCAL/ADC/adc.c ../MCAL/ADC/adc.h \
   ../MCAL/ADC/../../HAL/LCD/../../MCAL/micro_config.h \
   ../MCAL/ADC/../../HAL/LCD/../../MCAL/DIO/DIO.h \
   ../MCAL/ADC/../../Service/DISPLAY/DISPLAY.h \
-  ../MCAL/ADC/../../Service/DISPLAY/../../MCAL/micro_config.h \
   ../MCAL/ADC/../../Service/DISPLAY/../../HAL/LCD/LCD.h \
   ../MCAL/ADC/../../Service/TC72/TC72.h \
-  ../MCAL/ADC/../../Service/TC72/../../MCAL/micro_config.h \
   ../MCAL/ADC/../../Service/TC72/../../MCAL/SPI/SPI.h
 
 ../MCAL/ADC/adc.h:
@@ -56,12 +54,8 @@ MCAL/ADC/adc.o MCAL/ADC/adc.o: ../MCAL/ADC/adc.c ../MCAL/ADC/adc.h \
 
 ../MCAL/ADC/../../Service/DISPLAY/DISPLAY.h:
 
-../MCAL/ADC/../../Service/DISPLAY/../../MCAL/micro_config.h:
-
 ../MCAL/ADC/../../Service/DISPLAY/../../HAL/LCD/LCD.h:
 
 ../MCAL/ADC/../../Service/TC72/TC72.h:
-
-../MCAL/ADC/../../Service/TC72/../../MCAL/micro_config.h:
 
 ../MCAL/ADC/../../Service/TC72/../../MCAL/SPI/SPI.h:

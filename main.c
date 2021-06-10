@@ -28,7 +28,7 @@ int main(void)
     TC72_Init();
     DISPLAY_Init();
 
-    // DISPLAY_Welcome();
+     DISPLAY_Welcome();
     while (1)
     {
         updateTemp();

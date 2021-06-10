@@ -14,10 +14,8 @@ HAL/LCD/LCD.o HAL/LCD/LCD.o: ../HAL/LCD/LCD.c ../HAL/LCD/LCD.h \
   ../HAL/LCD/../../MCAL/../MCAL/SPI/../DIO/DIO.h \
   ../HAL/LCD/../../MCAL/../HAL/LCD/LCD.h \
   ../HAL/LCD/../../MCAL/../Service/DISPLAY/DISPLAY.h \
-  ../HAL/LCD/../../MCAL/../Service/DISPLAY/../../MCAL/micro_config.h \
   ../HAL/LCD/../../MCAL/../Service/DISPLAY/../../HAL/LCD/LCD.h \
   ../HAL/LCD/../../MCAL/../Service/TC72/TC72.h \
-  ../HAL/LCD/../../MCAL/../Service/TC72/../../MCAL/micro_config.h \
   ../HAL/LCD/../../MCAL/../Service/TC72/../../MCAL/SPI/SPI.h \
   ../HAL/LCD/../../MCAL/DIO/DIO.h
 
@@ -53,13 +51,9 @@ HAL/LCD/LCD.o HAL/LCD/LCD.o: ../HAL/LCD/LCD.c ../HAL/LCD/LCD.h \
 
 ../HAL/LCD/../../MCAL/../Service/DISPLAY/DISPLAY.h:
 
-../HAL/LCD/../../MCAL/../Service/DISPLAY/../../MCAL/micro_config.h:
-
 ../HAL/LCD/../../MCAL/../Service/DISPLAY/../../HAL/LCD/LCD.h:
 
 ../HAL/LCD/../../MCAL/../Service/TC72/TC72.h:
-
-../HAL/LCD/../../MCAL/../Service/TC72/../../MCAL/micro_config.h:
 
 ../HAL/LCD/../../MCAL/../Service/TC72/../../MCAL/SPI/SPI.h:
 

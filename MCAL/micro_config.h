@@ -8,9 +8,8 @@
 #ifndef MCAL_MICRO_CONFIG_H_
 #define MCAL_MICRO_CONFIG_H_
 
-#ifndef F_CPU
+#undef F_CPU
 #define F_CPU 4000000UL //4MHz Clock frequency
-#endif
 
 #include <avr/interrupt.h>
 #include <util/delay.h>
