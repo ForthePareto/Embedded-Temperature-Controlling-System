@@ -26,7 +26,7 @@
 #define OCIE2 7
 #define TOIE2 6
 
-extern volatile uint8 g_T2nOverflows;
+extern volatile uint16 g_T2nOverflows;
 
 typedef enum {
 	TIMER2_NORMAL_MODE = 0x00,

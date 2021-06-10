@@ -11,7 +11,7 @@ static void (*volatile g_T1CompareInterruptFunc_ptr)(void) = NULL;
 
 static void (*volatile g_T1OverflowInterruptFunc_ptr)(void) = NULL;
 
-volatile uint8 g_T1nOverflows = (uint8) 0;
+volatile uint16 g_T1nOverflows = (uint16) 0;
 
 void TIMER1_init(const TIMER1_config *configStruct) {
 	TCCR1A = (1 << FOC1A) | (1 << FOC1B) | (configStruct->mode & 0xFF);

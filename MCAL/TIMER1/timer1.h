@@ -8,7 +8,7 @@
 #ifndef MCAL_TIMER1_TIMER1_H_
 #define MCAL_TIMER1_TIMER1_H_
 #include "../micro_config.h"
-extern volatile uint8 g_T1nOverflows;
+extern volatile uint16 g_T1nOverflows;
 typedef enum {
 	TIMER1_NORMAL = 0x0000, TIMER1_CTC = 0x0800,
 } TIMER1_mode;

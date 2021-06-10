@@ -12,7 +12,7 @@ static void (*volatile g_T0OverflowInterruptFunc_ptr)(void) = NULL;
 
 
 // MISRA :note 9225: integral expression of underlying type 'signed char' cannot be implicitly converted to type 'volatile uint8' (aka 'volatile unsigned char') because it is not a wider integer type of the same signedness [MISRA 2004 Rule 10.1, required]
-volatile uint8 g_T0nOverflows = (uint8)0 ;
+volatile uint16 g_T0nOverflows = (uint16)0 ;
 
 void TIMER0_init(const TIMER0_config *configStruct) {
 	/* Mode setting: {NORMAL , PWM_PHASE_CORRECT, CTC, FAST_PWM}*/
