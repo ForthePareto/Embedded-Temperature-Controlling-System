@@ -1,10 +1,3 @@
-/*
- * micro_config.h
- *
- *  Created on: Jun. 6, 2021
- *      Author: Eslam Khaled Korany
- */
-
 #ifndef MCAL_MICRO_CONFIG_H_
 #define MCAL_MICRO_CONFIG_H_
 
@@ -17,12 +10,9 @@
 #include "../MCAL/common_macros.h"
 #include "../MCAL/std_types.h"
 
-#include "../MCAL/INTERRUPT/INTERRUPT.h"
 #include "../HAL/KEYPAD/KEYPAD.h"
-#include "../MCAL/SPI/SPI.h"
-#include "../HAL/LCD/LCD.h"
-#include "../Service/DISPLAY/DISPLAY.h"
 #include "../Service/TC72/TC72.h"
+#include "../Service/DISPLAY/DISPLAY.h"
 
 
 #define ENABLE_GLOBAL_INTERRUPT() (SET_BIT(SREG,7))

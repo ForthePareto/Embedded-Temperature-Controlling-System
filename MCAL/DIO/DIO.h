@@ -1,7 +1,9 @@
 #ifndef DIO_H_INCLUDED
 #define DIO_H_INCLUDED
 
-#include "../micro_config.h"
+#include <avr/io.h>
+#include "../std_types.h"
+#include "../common_macros.h"
 
 void DIO_setPINDir(uint8 portname, uint8 pinnumber, uint8 direction);
 void DIO_write(uint8 portname, uint8 pinnumber, uint8 outputvalue);

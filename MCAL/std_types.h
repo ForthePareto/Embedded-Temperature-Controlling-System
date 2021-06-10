@@ -8,9 +8,6 @@
 #ifndef MCAL_STD_TYPES_H_
 #define MCAL_STD_TYPES_H_
 
-
-
-typedef unsigned char 		  bool;
 typedef unsigned char         uint8;          /*           0 .. 255             */
 typedef signed char           sint8;          /*        -128 .. +127            */
 typedef unsigned short        uint16;         /*           0 .. 65535           */
