@@ -26,7 +26,7 @@ void PWM0_start(float64 duty) {
 
 }
 
-void PMW0_stop(void) {
+void PWM0_stop(void) {
 	TIMER0_stop() ;
 	TIMER0_setCompareValue(0) ;
 }

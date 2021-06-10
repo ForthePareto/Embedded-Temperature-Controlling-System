@@ -16,7 +16,7 @@
 
 void PWM0_init(TIMER0_clock prescaler,uint8 PWM_MODE); /* f_wave = F_CPU/(prescaler*256) */
 void PWM0_start(float64 duty); /*duty is a fraction real number 0:1*/
-void PMW0_stop(void);
+void PWM0_stop(void);
 
 
 #endif /* MCAL_PWM0_PWM0_H_ */
