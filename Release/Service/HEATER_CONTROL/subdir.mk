@@ -4,17 +4,17 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../MCAL/ADC_with_PWM_test.c 
+../Service/HEATER_CONTROL/heater_control.c 
 
 OBJS += \
-./MCAL/ADC_with_PWM_test.o 
+./Service/HEATER_CONTROL/heater_control.o 
 
 C_DEPS += \
-./MCAL/ADC_with_PWM_test.d 
+./Service/HEATER_CONTROL/heater_control.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
-MCAL/%.o: ../MCAL/%.c
+Service/HEATER_CONTROL/%.o: ../Service/HEATER_CONTROL/%.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: AVR Compiler'
 	avr-gcc -Wall -Os -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=1000000UL -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -c -o "$@" "$<"

@@ -18,11 +18,13 @@ volatile uint8 SCREEN = 0;
 
 int main(void)
 {
+//	delay_15ms(15,LCD_INIT); //t_delay =(prescaler/ f_cpu) *reg_size ----> reg_size =t *fcpu / prescaler
+	LCD_Init();
     Interrupt_Init();
     KEYPAD_Init();
     SPI_InitMaster();
     TC72_Init();
-    LCD_Init();
+
 
     // WELCOME
     DISPLAY_Welcome();

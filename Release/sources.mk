@@ -21,16 +21,19 @@ C_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
-HAL/ADC \
 HAL/KEYPAD \
 HAL/LCD \
+MCAL/ADC \
+MCAL \
 MCAL/DIO \
 MCAL/INTERRUPT \
 MCAL/PWM0 \
 MCAL/SPI \
 MCAL/TIMER0 \
+MCAL/TIMER1 \
 MCAL/TIMER2 \
 Service/DISPLAY \
+Service/HEATER_CONTROL \
 Service/TC72 \
 . \
 

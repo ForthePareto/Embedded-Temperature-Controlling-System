@@ -8,9 +8,7 @@
 #ifndef MCAL_TIMER0_TIMER0_H_
 #define MCAL_TIMER0_TIMER0_H_
 
-
 #include "../micro_config.h"
-
 
 /* Timer0 Registers BITs */
 #define FOC0 7
@@ -21,7 +19,6 @@
 #define CS02 2
 #define CS01 1
 #define CS00 0
-
 
 #define OCIE0 1
 #define TOIE0 0
@@ -74,10 +71,6 @@ typedef struct {
  * 			initial_value: 0:255
  ***************************************************/
 
-
-
-
-
 /*********************************************************************************
  * 								Function Declarations							 *
  *********************************************************************************/
@@ -87,7 +80,7 @@ void TIMER0_init(const TIMER0_config *config_ptr);
  *	pointer to the configuration structure :
  *		indicating a constant configurations from the user in the main application
  ***********************************************************/
-void TIMER0_start(uint8 initial_count);
+void TIMER0_restart(uint8 initial_count, TIMER0_clock clk);
 /**********************************************************
  * setting the pre-scaler and the initial value of the counter register 0:255
  ***********************************************************/

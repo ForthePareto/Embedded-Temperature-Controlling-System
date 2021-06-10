@@ -93,7 +93,7 @@ void TIMER2_setCompareValue(uint8 value);
  * [ARGS] :
  * 	a 0:255 value that corresponds to the compare value to be set in the OCR0
  ***********************************************************/
- void TIMER2_start(uint8 initial_count);
+ void TIMER2_restart(uint8 initial_count, TIMER2_clock clk);
 /**********************************************************
  * setting the pre-scaler and the initial value of the counter register 0:255
  ***********************************************************/
