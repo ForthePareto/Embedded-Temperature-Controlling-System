@@ -14,11 +14,13 @@ void TC72_Init(void)
 	_delay_us(100);
 }
 
-uint8 * TC72_getTemp(uint8 * str)
+void TC72_getTemp(void)
 {
     uint8 msb = 0;
     // uint8 lsb = 0;
     uint8 temp = 0;
+    uint8 changed = 0;
+
     DIO_write('B', SS, 1);
     /*Read the MSB*/
     SPI_Transmit(0x02);
@@ -46,46 +48,51 @@ uint8 * TC72_getTemp(uint8 * str)
     if(msb & 0x80) // if odd (first bit is 1)
     {
         temp = ~(msb) + 1; // convert to unsigned char
-		// str[0] = '-'; // sign disabled
+		// crTemp[0] = '-'; // sign disabled
     }
     else
     {
         temp = msb;
-		// str[0] = ' ';
+		// crTemp[0] = ' ';
     }
 
-    str[0] = convertIntChar(temp / 10);
-    str[1] = convertIntChar(temp % 10);
-	// str[3] = '.';
+    crTemp[0] = convertIntChar(temp / 10);
+    crTemp[1] = convertIntChar(temp % 10);
+	// crTemp[3] = '.';
 	/* switch(lsb)
 	{
 		case (uint8)0x00:
-			str[4] = '0';
-			str[5] = '0';
+			crTemp[4] = '0';
+			crTemp[5] = '0';
 			break;
 
 		case (uint8)0x80:
-			str[4] = '5';
-			str[5] = '0';
+			crTemp[4] = '5';
+			crTemp[5] = '0';
 			break;
 		
 		case (uint8)0x40:
-			str[4] = '2';
-			str[5] = '5';
+			crTemp[4] = '2';
+			crTemp[5] = '5';
 			break;
 		
 		case (uint8)0xc0:
-			str[4] = '2';
-			str[5] = '5';
+			crTemp[4] = '2';
+			crTemp[5] = '5';
 			break;
 		
 		default:
-			str[4] = '9';
-			str[5] = '9';
+			crTemp[4] = '9';
+			crTemp[5] = '9';
 			break;
 	} */
-
-    return str;
+    
+    /* if((crTemp[0] != Compare[0]) & (crTemp[1] != Compare[1]))
+    {
+        Compare[0] = crTemp[0];
+        Compare[1] = crTemp[1];
+        changed = 1;
+    } */
 }
 
 uint8 convertIntChar(uint8 num)
