@@ -72,7 +72,7 @@ int main(void) {
 	ADC_init(&adc_config);
 	PWM0_init(TIMER0_F_CPU_8, PWM_FAST_MODE);
 
-	// DISPLAY_Welcome();
+	DISPLAY_Welcome();
 	DSPLAY_IDLEscreen((uint8*) setTemp, (uint8) CURRENT_STATE, crTemp);
 	while (1) {
 		updateTemp(); // every 200ms
