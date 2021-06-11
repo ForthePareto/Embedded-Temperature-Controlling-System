@@ -165,8 +165,7 @@ void string_to_int_temp(uint8 *temp, uint8 *TEMP) {
 	*TEMP = y + (10 * x);
 }
 
-// MISRA :warning 601: expected a type, int assumed [MISRA 2004 Rule 8.2, required]
-// MISRA :warning 533: function 'ISR' should return a value [MISRA 2004 Rule 16.8, required]
+// MISRA: Special function
 ISR(INT0_vect) {
 	pressedBtn = KeyPad_GetKeyC0();
 	if ((pressedBtn == '*')
@@ -191,7 +190,7 @@ ISR(INT0_vect) {
 	}
 }
 
-// MISRA :error 31: redefinition of symbol 'ISR'
+// MISRA: Special function can be redifined
 ISR(INT1_vect) {
 	if ((CURRENT_STATE == STATE_OPERATION) || (CURRENT_STATE == STATE_NORMAL)) {
 		pressedBtn = KeyPad_GetKeyC1();
@@ -201,6 +200,8 @@ ISR(INT1_vect) {
 
 }
 
+
+// MISRA: Special function can be redifined
 ISR(INT2_vect) {
 	pressedBtn = KeyPad_GetKeyC2();
 	if (pressedBtn == (uint8) '#') {
