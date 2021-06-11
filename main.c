@@ -12,7 +12,7 @@
 
 volatile uint8 usrInput[2] = "25";
 uint8 setTemp[2] = "25"; //default 25
-uint8 crTemp[2] = "25";
+uint8 crTemp[2] = "FF";
 volatile uint8 Compare[2] = "25";
 volatile uint8 idx = 0x00;
 
@@ -38,31 +38,27 @@ void string_to_int_temp(uint8 *temp, uint8 *TEMP);
 void update_time(void) {
 	//one tick means 100ms passed
 	g_T1nOverflows++;
-	if ( (CURRENT_STATE == STATE_OPERATION) && (SET_TEMP > CURRENT_TEMP) && ((SET_TEMP - CURRENT_TEMP) > 5)) {
+	if ((g_T1nOverflows % 2 == 0)
+			&& ((CURRENT_STATE == STATE_NORMAL)
+					|| (CURRENT_STATE == STATE_OPERATION))) {
+		CHECK_TEMP = ENABLE;
+	}
+	if ((g_T1nOverflows % 5 == 0)
+			&& ((CURRENT_STATE == STATE_NORMAL)
+					|| (CURRENT_STATE == STATE_OPERATION))) {
+		CHECK_ADC = ENABLE;
+	}
+
+	if ( (CURRENT_STATE == STATE_OPERATION) && ((SET_TEMP > CURRENT_TEMP) && ((SET_TEMP - CURRENT_TEMP) > 5))) {
 		NOT_HEATING_watcher++;
 	}
 	else{
 		NOT_HEATING_watcher = 0 ;
 	}
-
-	if ((g_T1nOverflows % 200 == 0)
-			&& ((CURRENT_STATE == STATE_NORMAL)
-					|| (CURRENT_STATE == STATE_OPERATION))) {
-		CHECK_TEMP = ENABLE;
-
-	}
-	if ((g_T1nOverflows % 500 == 0)
-			&& ((CURRENT_STATE == STATE_NORMAL)
-					|| (CURRENT_STATE == STATE_OPERATION))) {
-		CHECK_ADC = ENABLE;
-
-	}
-
-	if ((NOT_HEATING_watcher % 1800 == 0) && (CURRENT_STATE == STATE_OPERATION)) //ERROR STATE
-
+	if ((NOT_HEATING_watcher >= (uint16)1800) && (CURRENT_STATE == STATE_OPERATION)) //ERROR STATE
 	{
 			CURRENT_STATE = STATE_ERROR;
-			NOT_HEATING_watcher = (uint16)0;
+			DSPLAY_IDLEscreen((uint8*) setTemp, (uint8) CURRENT_STATE, crTemp);
 			g_T1nOverflows = 0 ; //reset clock
 	}
 
@@ -87,9 +83,11 @@ int main(void) {
 				CURRENT_STATE = STATE_NORMAL;
 				DSPLAY_IDLEscreen((uint8*) setTemp, (uint8) CURRENT_STATE,
 						crTemp);
+				NOT_HEATING_watcher = 0 ;
 			} else if ((CURRENT_TEMP < SET_TEMP)
 					&& ((SET_TEMP - CURRENT_TEMP) <= 5)) {
 				CURRENT_STATE = STATE_NORMAL;
+				NOT_HEATING_watcher = 0 ;
 				DSPLAY_IDLEscreen((uint8*) setTemp, (uint8) CURRENT_STATE,
 						crTemp);
 
@@ -112,11 +110,13 @@ int main(void) {
 		if (CURRENT_STATE == STATE_NORMAL) {
 			if ((CURRENT_TEMP > SET_TEMP) && ((CURRENT_TEMP - SET_TEMP) > 5)) {
 				CURRENT_STATE = STATE_OPERATION;
+				NOT_HEATING_watcher = 0 ;
 				DSPLAY_IDLEscreen((uint8*) setTemp, (uint8) CURRENT_STATE,
 						crTemp);
 			} else if ((CURRENT_TEMP < SET_TEMP)
 					&& ((SET_TEMP - CURRENT_TEMP) > 5)) {
 				CURRENT_STATE = STATE_OPERATION;
+				NOT_HEATING_watcher = 0 ;
 				DSPLAY_IDLEscreen((uint8*) setTemp, (uint8) CURRENT_STATE,
 						crTemp);
 			}
