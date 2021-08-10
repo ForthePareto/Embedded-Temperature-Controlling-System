@@ -9,15 +9,15 @@
   2. **HAL**
   3. **Service**
   4. **Application** 
-* ### Desgin Patterns:
-  * Proxy pattern: all the micro-controller abstraction layer **(MCAL)** is implemented with proxy pattern that encapsulates and abstarcts the hardware.
-  * Periodic Polling: the core Schedular of the main application is implemented with periodic polling pattern
+* ### Design Patterns:
+  * Proxy pattern: all the micro-controller abstraction layer **(MCAL)** is implemented with a proxy pattern that encapsulates and abstracts the hardware.
+  * Periodic Polling: the core Scheduler of the main application is implemented with periodic polling pattern
   * State Machine: system states are treated as state machine.   
-* ### Real-time Design Constraints: Some components required periodicity and maximum jitter such as:
+* ### Real-time Design Constraints: Some components required periodicity and maximum jitter, such as:
   *  Temperature sensor update: every 200ms.
   *  The calibrator update: every 500ms.
   *  LCD Animation steps: every 100ms.
-  *  Heating checker: checks if the system doesn't reach the targetted temperature for 3 consecutive minutes.
+  *  Heating checker: checks if the system doesn't reach the targeted temperature for 3 consecutive minutes.
   *  Jitter is assumed 10% of periodicity of each component.
 
 # System Components
